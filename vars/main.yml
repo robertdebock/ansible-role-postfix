@@ -1,0 +1,9 @@
+---
+# vars file for postfix
+postfix_packages:
+  default:
+    - postfix
+
+postfix_services:
+  default:
+    - postfix
