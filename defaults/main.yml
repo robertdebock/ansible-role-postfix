@@ -1,2 +1,13 @@
 ---
 # defaults file for postfix
+# These settings are required in postfix and can be set using ansible variables.
+myhostname: "{{ ansible_fqdn }}"
+mydomain: "{{ ansible_domain }}"
+myorigin: "{{ ansible_domain }}"
+inet_inferfaces: "{{ ansible_default_ipv4.device }}"
+mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
+mynetworks: "{{ ansible_default_ipv4.network }}"
+
+# These settings change the role of the postfix server.
+#relay_domains: "$mydestination"
+#relayhost: relay.example.com

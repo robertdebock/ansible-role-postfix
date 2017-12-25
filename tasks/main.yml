@@ -9,6 +9,13 @@
       | default(postfix_packages[ansible_distribution]
       | default(postfix_packages['default'] )) }}"
 
+- name: configure software
+  template:
+    src: templates/main.cf.j2
+    dest: /etc/postfix/main.cf
+  notify:
+    - restart software
+
 - name: start and enable software
   service:
     name: "{{ item }}"

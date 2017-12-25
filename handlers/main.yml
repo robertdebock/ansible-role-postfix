@@ -1,2 +1,6 @@
 ---
 # handlers file for postfix
+- name: restart software
+  service:
+    name: postfix
+    state: restarted
