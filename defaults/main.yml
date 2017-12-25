@@ -4,10 +4,17 @@
 myhostname: "{{ ansible_fqdn }}"
 mydomain: "{{ ansible_domain }}"
 myorigin: "{{ ansible_domain }}"
-inet_inferfaces: "{{ ansible_default_ipv4.device | default('all') }}"
+# To "listen" on public interfaces, set inet_interfaces to something like
+# "all" or the name of the interface, such as "eth0".
+inet_inferfaces: "loopback-only"
 mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
-mynetworks: "{{ ansible_default_ipv4.network }}"
+# To accept email from other machines, set the mynetworks to something like
+# "192.168.0.0/24".
+mynetworks: "127.0.0.0/8"
 
-# These settings change the role of the postfix server.
+# These settings change the role of the postfix server to a relay host.
 # relay_domains: "$mydestination"
-# relayhost: relay.example.com
+
+# If you want to forward emails to another central relay server, set relayhost.
+# use brackets to sent to the A-record of the relayhost.
+# relayhost: [relay.example.com]
