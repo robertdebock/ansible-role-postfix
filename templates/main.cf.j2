@@ -215,7 +215,7 @@ inet_protocols = all
 
 # The unknown_local_recipient_reject_code specifies the SMTP server
 # response code when a recipient domain matches $mydestination or
-# $%7Bproxy,inet%7D_interfaces, while $local_recipient_maps is non-empty
+# ${proxy,inet}_interfaces, while $local_recipient_maps is non-empty
 # and the recipient address or address local-part is not found.
 #
 # The default setting is 550 (reject mail) but it is safer to start
@@ -301,7 +301,7 @@ mynetworks = {{ mynetworks }}
 #relay_domains = $mydestination
 {% if relay_domains is defined %}
 relay_domains = {{ relay_domains }}
-{% endif }
+{% endif %}
 
 # INTERNET OR INTRANET
 
@@ -325,7 +325,7 @@ relay_domains = {{ relay_domains }}
 #relayhost = [an.ip.add.ress]
 {% if relayhost is defined %}
 relayhost = {{ relayhost }}
-{% endif }
+{% endif %}
 
 # REJECTING UNKNOWN RELAY USERS
 #
@@ -527,8 +527,8 @@ alias_database = hash:/etc/aliases
 # username), $shell (recipient shell), $home (recipient home directory),
 # $recipient (full recipient address), $extension (recipient address
 # extension), $domain (recipient domain), $local (entire recipient
-# localpart), $recipient_delimiter. Specify $%7Bname?value%7D or
-# $%7Bname:value%7D to expand value only when $name does (does not) exist.
+# localpart), $recipient_delimiter. Specify ${name?value} or
+# ${name:value} to expand value only when $name does (does not) exist.
 #
 # luser_relay works only for the default Postfix local delivery agent.
 #

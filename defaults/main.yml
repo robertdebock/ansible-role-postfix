@@ -4,7 +4,7 @@
 myhostname: "{{ ansible_fqdn }}"
 mydomain: "{{ ansible_domain }}"
 myorigin: "{{ ansible_domain }}"
-inet_inferfaces: "{{ ansible_default_ipv4.device }}"
+inet_inferfaces: "{{ ansible_default_ipv4.device | default('all') }}"
 mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 mynetworks: "{{ ansible_default_ipv4.network }}"
 
