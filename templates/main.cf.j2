@@ -301,7 +301,7 @@ mynetworks = {{ mynetworks }}
 #relay_domains = $mydestination
 {% if relay_domains is defined %}
 relay_domains = {{ relay_domains }}
-{% enfif }
+{% endif }
 
 # INTERNET OR INTRANET
 
@@ -325,7 +325,7 @@ relay_domains = {{ relay_domains }}
 #relayhost = [an.ip.add.ress]
 {% if relayhost is defined %}
 relayhost = {{ relayhost }}
-{% enfif }
+{% endif }
 
 # REJECTING UNKNOWN RELAY USERS
 #
