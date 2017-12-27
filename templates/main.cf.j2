@@ -169,6 +169,9 @@ inet_protocols = all
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain,
 #	mail.$mydomain, www.$mydomain, ftp.$mydomain
+{% if mydestination is defined %}
+mydestination = {{ mydestination }}
+{% endif }
 
 # REJECTING MAIL FOR UNKNOWN LOCAL USERS
 #
