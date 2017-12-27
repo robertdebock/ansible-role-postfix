@@ -1,20 +1,20 @@
 ---
 # defaults file for postfix
 # These settings are required in postfix and can be set using ansible variables.
-myhostname: "{{ ansible_fqdn }}"
-mydomain: "{{ ansible_domain }}"
-myorigin: "{{ ansible_domain }}"
+postfix_myhostname: "{{ ansible_fqdn }}"
+postfix_mydomain: "{{ ansible_domain }}"
+postfix_myorigin: "{{ ansible_domain }}"
 # To "listen" on public interfaces, set inet_interfaces to something like
 # "all" or the name of the interface, such as "eth0".
-inet_inferfaces: "loopback-only"
-mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
+postfix_inet_inferfaces: "loopback-only"
+postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 # To accept email from other machines, set the mynetworks to something like
 # "192.168.0.0/24".
-mynetworks: "127.0.0.0/8"
+postfix_mynetworks: "127.0.0.0/8"
 
 # These settings change the role of the postfix server to a relay host.
-# relay_domains: "$mydestination"
+# postfix_relay_domains: "$mydestination"
 
 # If you want to forward emails to another central relay server, set relayhost.
 # use brackets to sent to the A-record of the relayhost.
-# relayhost: [relay.example.com]
+# postfix_relayhost: [relay.example.com]

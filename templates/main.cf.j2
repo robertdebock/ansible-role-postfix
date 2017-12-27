@@ -74,7 +74,7 @@ mail_owner = postfix
 #
 #myhostname = host.domain.tld
 #myhostname = virtual.domain.tld
-myhostname = {{ myhostname }}
+myhostname = {{ postfix_myhostname }}
 
 # The mydomain parameter specifies the local internet domain name.
 # The default is to use $myhostname minus the first component.
@@ -82,7 +82,7 @@ myhostname = {{ myhostname }}
 # parameters.
 #
 #mydomain = domain.tld
-mydomain = {{ mydomain }}
+mydomain = {{ postfix_mydomain }}
 
 # SENDING MAIL
 #
@@ -99,7 +99,7 @@ mydomain = {{ mydomain }}
 #
 #myorigin = $myhostname
 #myorigin = $mydomain
-myorigin = {{ myorigin }}
+myorigin = {{ postfix_myorigin }}
 
 # RECEIVING MAIL
 
@@ -117,7 +117,7 @@ myorigin = {{ myorigin }}
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
 #inet_inferfaces = localhost
-inet_interfaces = {{ inet_inferfaces }}
+inet_interfaces = {{ postfix_inet_inferfaces }}
 
 # Enable IPv4, and IPv6 if supported
 inet_protocols = all
@@ -169,8 +169,8 @@ inet_protocols = all
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain,
 #	mail.$mydomain, www.$mydomain, ftp.$mydomain
-{% if mydestination is defined %}
-mydestination = {{ mydestination }}
+{% if postfix_mydestination is defined %}
+mydestination = {{ postfix_mydestination }}
 {% endif %}
 
 # REJECTING MAIL FOR UNKNOWN LOCAL USERS
@@ -271,7 +271,7 @@ unknown_local_recipient_reject_code = 550
 #mynetworks = 168.100.189.0/28, 127.0.0.0/8
 #mynetworks = $config_directory/mynetworks
 #mynetworks = hash:/etc/postfix/network_table
-mynetworks = {{ mynetworks }}
+mynetworks = {{ postfix_mynetworks }}
 
 # The relay_domains parameter restricts what destinations this system will
 # relay mail to.  See the smtpd_recipient_restrictions description in
@@ -302,8 +302,8 @@ mynetworks = {{ mynetworks }}
 # permit_mx_backup restriction description in postconf(5).
 #
 #relay_domains = $mydestination
-{% if relay_domains is defined %}
-relay_domains = {{ relay_domains }}
+{% if postfix_relay_domains is defined %}
+relay_domains = {{ postfix_relay_domains }}
 {% endif %}
 
 # INTERNET OR INTRANET
@@ -326,8 +326,8 @@ relay_domains = {{ relay_domains }}
 #relayhost = [mailserver.isp.tld]
 #relayhost = uucphost
 #relayhost = [an.ip.add.ress]
-{% if relayhost is defined %}
-relayhost = {{ relayhost }}
+{% if postfix_relayhost is defined %}
+relayhost = {{ postfix_relayhost }}
 {% endif %}
 
 # REJECTING UNKNOWN RELAY USERS
