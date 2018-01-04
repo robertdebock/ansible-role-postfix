@@ -2,8 +2,8 @@
 # defaults file for postfix
 # These settings are required in postfix and can be set using ansible variables.
 postfix_myhostname: "{{ ansible_fqdn }}"
-postfix_mydomain: "{{ ansible_domain | default ('localdomain') }}"
-postfix_myorigin: "{{ ansible_domain | default ('localdomain') }}"
+postfix_mydomain: "{{ ansible_domain | default ('localdomain', true) }}"
+postfix_myorigin: "{{ ansible_domain | default ('localdomain', true) }}"
 # To "listen" on public interfaces, set inet_interfaces to something like
 # "all" or the name of the interface, such as "eth0".
 postfix_inet_inferfaces: "loopback-only"
@@ -18,3 +18,19 @@ postfix_mynetworks: "127.0.0.0/8"
 # If you want to forward emails to another central relay server, set relayhost.
 # use brackets to sent to the A-record of the relayhost.
 # postfix_relayhost: [relay.example.com]
+
+# Set the restrictions for receiving mails.
+postfix_smtpd_recipient_restrictions:
+  - permit_mynetworks
+  - permit_sasl_authenticated
+  - reject_unauth_destination
+  - reject_invalid_hostname
+  - reject_non_fqdn_hostname
+  - reject_non_fqdn_sender
+  - reject_non_fqdn_recipient
+  - reject_unknown_sender_domain
+  - reject_unknown_recipient_domain
+  - reject_rbl_client sbl.spamhaus.org
+  - reject_rbl_client cbl.abuseat.org
+  - reject_rbl_client dul.dnsbl.sorbs.net
+  - permit

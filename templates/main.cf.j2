@@ -307,6 +307,10 @@ mynetworks = {{ postfix_mynetworks }}
 relay_domains = {{ postfix_relay_domains }}
 {% endif %}
 
+{% if postfix_smtpd_recipient_restrictions is defined %}
+smtpd_recipient_restrictions = {% for smtpd_recipient_restriction in postfix_smtpd_recipient_restrictions %}{{ smtpd_recipient_restriction }}, {% endfor %}
+{% endif %}
+
 # INTERNET OR INTRANET
 
 # The relayhost parameter specifies the default host to send mail to
