@@ -9,6 +9,12 @@
       | default(postfix_packages[ansible_distribution]
       | default(postfix_packages['default'] )) }}"
 
+- name: create group
+  group:
+    name: "{{ item }}"
+  with_items:
+    - "{{ postfix_group[ansible_distribution] | default(postfix_group['default']) }}"
+
 - name: configure software
   template:
     src: templates/main.cf.j2

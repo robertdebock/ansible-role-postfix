@@ -7,3 +7,14 @@ postfix_packages:
 postfix_services:
   default:
     - postfix
+
+postfix_daemon_directory:
+  default: /usr/libexec/postfix
+  Ubuntu: /usr/lib/postfix
+  openSUSE Leap: /usr/lib/postfix
+
+postfix_group:
+  openSUSE Leap:
+    - maildrop
+  default:
+    - postdrop
