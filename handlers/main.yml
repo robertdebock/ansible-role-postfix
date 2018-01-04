@@ -1,6 +1,10 @@
 ---
 # handlers file for postfix
 - name: restart software
+  command: postconf -d
+  notify: really restart software
+
+- name: really restart software
   service:
     name: postfix
     state: restarted
