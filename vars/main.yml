@@ -14,7 +14,4 @@ postfix_daemon_directory:
   openSUSE Leap: /usr/lib/postfix
 
 postfix_group:
-  openSUSE Leap:
-    - maildrop
-  default:
-    - postdrop
+  default: postdrop

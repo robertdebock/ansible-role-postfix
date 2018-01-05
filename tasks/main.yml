@@ -15,10 +15,17 @@
   with_items:
     - "{{ postfix_group[ansible_distribution] | default(postfix_group['default']) }}"
 
-- name: configure software
+- name: configure software (main.cf)
   template:
     src: templates/main.cf.j2
     dest: /etc/postfix/main.cf
+  notify:
+    - restart software
+
+- name: configure software (master.cf)
+  template:
+    src: templates/master.cf.j2
+    dest: /etc/postfix/master.cf
   notify:
     - restart software
 
