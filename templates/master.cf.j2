@@ -12,7 +12,7 @@
 {% if postfix_spamassassin is defined %}
 smtp      inet  n       -       n       -       -       smtpd -o content_filter=spamd
 spamd     unix  -       n       n       -       -       pipe flags=R user={{ postfix_spamassassin_user | default('spamd') }} argv=/usr/bin/spamc -e /usr/sbin/sendmail -oi -f ${sender} ${recipient}
-{$ else %}
+{% else %}
 smtp      inet  n       -       n       -       -       smtpd
 {% endif %}
 #smtp      inet  n       -       n       -       1       postscreen
