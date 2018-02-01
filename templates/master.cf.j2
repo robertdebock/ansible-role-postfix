@@ -11,9 +11,13 @@
 # ==========================================================================
 {% if postfix_spamassassin is defined %}
 smtp      inet  n       -       n       -       -       smtpd -o content_filter=spamassassin
-spamassassin     unix  -       n       n       -       -       pipe flags=R user={{ postfix_spamassassin_user | default('spamd') }} argv=/usr/bin/spamc -e /usr/sbin/sendmail -oi -f ${sender} ${recipient}
+spamassassin     unix   -       n       n       -       -       pipe flags=R user={{ postfix_spamassassin_user | default('spamd') }} argv=/usr/bin/spamc -e /usr/sbin/sendmail -oi -f ${sender} ${recipient}
 {% else %}
 smtp      inet  n       -       n       -       -       smtpd
+{% endif %}
+{% if postfix_clamav is defined %}
+scan      unix  -       -       n       -       16      smtp -o smtp_send_xforward_command=yes
+127.0.0.1:10026 inet  n -       n       -       16      smtpd -o content_filter= -o receive_override_options=no_unknown_recipient_checks,no_header_body_checks -o smtpd_helo_restrictions= -o smtpd_client_restrictions= -o smtpd_sender_restrictions= -o smtpd_recipient_restrictions=permit_mynetworks,reject -o mynetworks_style=host -o smtpd_authorized_xforward_hosts=127.0.0.0/8
 {% endif %}
 #smtp      inet  n       -       n       -       1       postscreen
 #smtpd     pass  -       -       n       -       -       smtpd

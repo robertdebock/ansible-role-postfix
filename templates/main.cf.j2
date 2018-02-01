@@ -696,3 +696,9 @@ sample_directory = /usr/share/doc/postfix-2.10.1/samples
 # readme_directory: The location of the Postfix README files.
 #
 readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES
+
+# content_filter: An optional filter to classify content.
+{% if postfix_clamav is defined %}
+content_filter = scan:127.0.0.1:10025
+receive_override_options = no_address_mappings
+{% endid %}

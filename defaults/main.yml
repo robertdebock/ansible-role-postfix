@@ -37,5 +37,9 @@ postfix_smtpd_recipient_restrictions:
 
 # To enable spamassassin, ensure spamassassin is installed,
 # (hint: role: robertdebock.spamassassin) and set these two variables:
-# postfix_spamassassin=enabled
-# postfix_spamassassin_user=spamd
+# postfix_spamassassin: enabled
+# postfix_spamassassin_user: spamd
+
+# To enable clamav, ensure clamav is installed,
+# (hint: role: robertdebock.clamav) and set this variable:
+# postfix_clamav: enabled
