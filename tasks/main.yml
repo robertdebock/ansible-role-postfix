@@ -20,14 +20,14 @@
     src: templates/main.cf.j2
     dest: /etc/postfix/main.cf
   notify:
-    - restart software
+    - restart postfix
 
 - name: configure software (master.cf)
   template:
     src: templates/master.cf.j2
     dest: /etc/postfix/master.cf
   notify:
-    - restart software
+    - restart postfix
 
 - name: start and enable software
   service:
