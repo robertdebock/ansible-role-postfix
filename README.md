@@ -18,6 +18,8 @@ See defaults/main.yml
 Dependencies
 ------------
 
+You can use this role to prepare your system.
+
 - robertdebock.bootstrap
 
 Download the dependencies by issuing this command:
@@ -32,6 +34,7 @@ Example Playbook
 - hosts: servers
 
   roles:
+    - role: robertdebock.bootstrap
     - role: robertdebock.postfix
 ```
 

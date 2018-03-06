@@ -5,4 +5,5 @@
   strategy: free
 
   roles:
+    - role: robertdebock.bootstrap
     - role: ansible-role-postfix
