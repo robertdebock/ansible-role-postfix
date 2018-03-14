@@ -34,12 +34,46 @@ ansible-galaxy install --role-file requirements.yml
 Example Playbook
 ----------------
 
+Basic configuration, using all defaults (See defaults/main.yml).
 ```
 - hosts: servers
 
   roles:
     - role: robertdebock.bootstrap
     - role: robertdebock.postfix
+```
+
+To configure postfix to relay all its email to a relayhost:
+```
+- hosts: servers
+
+  roles:
+    - role: robertdebock.bootstrap
+    - role: robertdebock.postfix
+      postfix_relayhost: "[relay.example.com]"
+```
+
+
+To configure postfix to receive all mail for example.com:
+```
+- hosts: mailserver
+
+  roles:
+    - role: robertdebock.bootstrap
+    - role: robertdebock.postfix
+      postfix_mydestination: "example.com, $mydomain, $myhostname, localhost.$mydomain, localhost"
+```
+
+To configure postfix to use spamassassin and clamav:
+```
+- hosts: mailserver
+
+  roles:
+    - role: robertdebock.bootstrap
+    - role: robertdebock.postfix
+      postfix_mydestination: "example.com, $mydomain, $myhostname, localhost.$mydomain, localhost"
+      postfix_spamassassin: enabled
+      postfix_clamav: enabled
 ```
 
 Install this role using `galaxy install robertdebock.postfix`.
