@@ -6,4 +6,4 @@
 
   roles:
     - role: robertdebock.bootstrap
-    - role: ansible-role-ntp
+    - role: ansible-role-postfix
