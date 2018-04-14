@@ -19,7 +19,7 @@
   template:
     src: templates/main.cf.j2
     dest: /etc/postfix/main.cf
-    validate: postconf -d -c %s
+  validate: postconf -d -c %s
   notify:
     - restart postfix
 
@@ -27,7 +27,7 @@
   template:
     src: templates/master.cf.j2
     dest: /etc/postfix/master.cf
-    validate: postconf -d -c %s
+  validate: postconf -d -c %s
   notify:
     - restart postfix
 
