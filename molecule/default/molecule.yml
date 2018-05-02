@@ -24,10 +24,10 @@ platforms:
     image: debian:stretch
   - name: postfix-debian-buster
     image: debian:buster
-  - name: postfix-fedora-26
-    image: fedora:26
   - name: postfix-fedora-27
     image: fedora:27
+  - name: postfix-fedora-28
+    image: fedora:28
   - name: postfix-opensuse-42.2
     image: opensuse:42.2
   - name: postfix-opensuse-42.3
