@@ -17,7 +17,7 @@
 
 - name: configure software (main.cf)
   template:
-    src: templates/main.cf.j2
+    src: main.cf.j2
     dest: /etc/postfix/main.cf
     validate: postconf -d -c %s
   notify:
@@ -25,7 +25,7 @@
 
 - name: configure software (master.cf)
   template:
-    src: templates/master.cf.j2
+    src: master.cf.j2
     dest: /etc/postfix/master.cf
     validate: postconf -d -c %s
   notify:
