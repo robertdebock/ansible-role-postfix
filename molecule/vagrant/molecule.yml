@@ -36,5 +36,3 @@ scenario:
   name: vagrant
 verifier:
   name: goss
-  lint:
-    name: 'flake8'
