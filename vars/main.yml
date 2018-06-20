@@ -12,6 +12,7 @@ postfix_daemon_directory:
   default: /usr/libexec/postfix
   Ubuntu: /usr/lib/postfix
   openSUSE Leap: /usr/lib/postfix
+  openSUSE Tumbleweed: /usr/lib/postfix
 
 postfix_group:
   default: postdrop
