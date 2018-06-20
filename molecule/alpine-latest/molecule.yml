@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: postfix-debian-stretch
-    image: debian:stretch
+  - name: postfix-alpine-latest
+    image: alpine:latest
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: debian-stretch
+  name: alpine-latest
 verifier:
   name: goss
   lint:

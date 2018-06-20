@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: postfix-alpine-3.6
-    image: alpine:3.6
+  - name: postfix-opensuse-tumbleweed
+    image: opensuse:tumbleweed
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: alpine-3.6
+  name: opensuse-tumbleweed
 verifier:
   name: goss
   lint:

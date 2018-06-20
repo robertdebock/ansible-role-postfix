@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: postfix-centos-7
-    image: centos:7
+  - name: postfix-opensuse-leap
+    image: opensuse:leap
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: centos-7
+  name: opensuse-leap
 verifier:
   name: goss
   lint:

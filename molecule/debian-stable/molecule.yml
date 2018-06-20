@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: postfix-fedora-27
-    image: fedora:27
+  - name: postfix-debian-stable
+    image: debian:stable
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: fedora-27
+  name: debian-stable
 verifier:
   name: goss
   lint:

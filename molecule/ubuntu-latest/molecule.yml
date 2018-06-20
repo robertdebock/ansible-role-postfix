@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: postfix-opensuse-42.3
-    image: opensuse:42.3
+  - name: postfix-ubuntu-latest
+    image: ubuntu:latest
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: opensuse-42.3
+  name: ubuntu-latest
 verifier:
   name: goss
   lint:

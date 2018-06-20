@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: postfix-opensuse-42.2
-    image: opensuse:42.2
+  - name: postfix-alpine-edge
+    image: alpine:edge
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: opensuse-42.2
+  name: alpine-edge
 verifier:
   name: goss
   lint:
