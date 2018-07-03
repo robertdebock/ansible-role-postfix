@@ -1,0 +1,3 @@
+---
+# vars file for postfix
+postfix_daemon_directory: /usr/lib/postfix

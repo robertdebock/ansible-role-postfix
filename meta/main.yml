@@ -2,9 +2,9 @@
 galaxy_info:
   author: Robert de Bock
   role_name: postfix
-  description: Provides Postfix for your system.
+  description: Wietse Venema's mail server that started life at IBM research as an alternative to the widely-used Sendmail program.
   license: Apache License, Version 2.0
-  min_ansible_version: 2.3
+  min_ansible_version: 2.4
   min_ansible_container_version: 0.2.0
 
   platforms:
@@ -37,14 +37,19 @@ galaxy_info:
         - bionic
 
   galaxy_tags:
-    - postfix
-    - installer
-    - package
     - alpine
+    - archlinux
     - centos
     - debian
     - fedora
+    - installer
+    - mailserver
+    - opensuse
+    - package
+    - postfix
     - rhel
+    - security
+    - system
     - ubuntu
 
 dependencies: []

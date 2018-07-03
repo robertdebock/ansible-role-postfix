@@ -1,19 +1,27 @@
 ---
 # tasks file for postfix
+- name: load default variables
+  include_vars:
+    file: default.yml
+
+- name: load os-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - default.yml
+
 - name: install software
   package:
     name: "{{ item }}"
     state: present
   with_items:
-    - "{{ postfix_packages[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-      | default(postfix_packages[ansible_distribution]
-      | default(postfix_packages['default'] )) }}"
+    - "{{ postfix_packages }}"
 
 - name: create group
   group:
     name: "{{ item }}"
   with_items:
-    - "{{ postfix_group[ansible_distribution] | default(postfix_group['default']) }}"
+    - "{{ postfix_group }}"
 
 - name: configure software (main.cf)
   template:
@@ -37,8 +45,6 @@
     state: started
     enabled: yes
   with_items:
-    - "{{ postfix_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-      | default(postfix_services[ansible_distribution]
-      | default(postfix_services['default'] )) }}"
+    - "{{ postfix_service }}"
   when:
     - ansible_virtualization_type != "docker"
