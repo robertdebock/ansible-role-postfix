@@ -20,7 +20,19 @@ Access to a repository containing packages, likely on the internet.
 Role Variables
 --------------
 
-See defaults/main.yml
+
+- postfix_myhostname: The hostname.
+- postfix_mydomain: The domain.
+- postfix_myorigin: Maybe the domain.
+- postfix_inet_inferfaces: A list of interfaces to listen on.
+- postfix_mydestination: What domain to consider as the destination.
+- postfix_mynetworks: A list of networks to relay mail for.
+- postfix_relay_domains: Domains to relay.
+- postfix_relayhost: Where to send mails to as a relay hop.
+- postfix_smtpd_recipient_restrictions: A list of restrictions.
+- postfix_spamassassin: enable spamassassin or not
+- postfix_spamassassin_user: what user for spamassassin
+- postfix_clamav: enable clamav or not.
 
 Dependencies
 ------------
