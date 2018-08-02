@@ -2,8 +2,8 @@
 # defaults file for postfix
 # These settings are required in postfix and can be set using ansible variables.
 postfix_myhostname: "{{ ansible_fqdn }}"
-postfix_mydomain: "{{ ansible_domain | default ('localdomain', yes) }}"
-postfix_myorigin: "{{ ansible_domain | default ('localdomain', yes) }}"
+postfix_mydomain: "{{ ansible_domain | default ('localdomain', true) }}"
+postfix_myorigin: "{{ ansible_domain | default ('localdomain', true) }}"
 # To "listen" on public interfaces, set inet_interfaces to something like
 # "all" or the name of the interface, such as "eth0".
 postfix_inet_inferfaces: "loopback-only"
