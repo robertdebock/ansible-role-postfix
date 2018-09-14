@@ -107,6 +107,8 @@ To configure postfix to use spamassassin and clamav:
 
   roles:
     - role: robertdebock.bootstrap
+    - role: robertdebock.spamassassin
+    - role: robertdebock.clamav
     - role: robertdebock.postfix
       postfix_mydestination: "example.com, $mydomain, $myhostname, localhost.$mydomain, localhost"
       postfix_spamassassin: enabled
