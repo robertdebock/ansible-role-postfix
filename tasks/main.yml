@@ -13,12 +13,14 @@
 - name: install software
   package:
     name: "{{ item }}"
+    state: present
   with_items:
     - "{{ postfix_packages }}"
 
 - name: create group
   group:
     name: "{{ item }}"
+    state: present
   with_items:
     - "{{ postfix_group }}"
 
