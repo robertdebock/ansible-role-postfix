@@ -5,6 +5,17 @@ postfix
 
 Provides Postfix for your system.
 
+[Unit tests](https://travis-ci.org/robertdebock/ansible-role-postfix) are done on every commit and periodically.
+
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-postfix/issues)
+
+To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
+```
+pip install molecule
+molecule test
+```
+There are many scenarios available, please have a look in the `molecule/` directory.
+
 Context
 --------
 This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.

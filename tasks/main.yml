@@ -1,30 +1,16 @@
 ---
 # tasks file for postfix
-- name: load default variables
-  include_vars:
-    file: default.yml
-
-- name: load os-specific variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution }}.yml"
-    - default.yml
-
-- name: install software
+- name: install postfix
   package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "{{ postfix_packages }}"
+    name: "{{ postfix_packages }}"
+    state: "{{ postfix_package_state }}"
 
 - name: create group
   group:
-    name: "{{ item }}"
+    name: "{{ postfix_group }}"
     state: present
-  with_items:
-    - "{{ postfix_group }}"
 
-- name: configure software (main.cf)
+- name: configure postfix (main.cf)
   template:
     src: main.cf.j2
     dest: /etc/postfix/main.cf
@@ -32,7 +18,7 @@
   notify:
     - restart postfix
 
-- name: configure software (master.cf)
+- name: configure postfix (master.cf)
   template:
     src: master.cf.j2
     dest: /etc/postfix/master.cf
@@ -40,12 +26,10 @@
   notify:
     - restart postfix
 
-- name: start and enable software
+- name: start and enable postfix
   service:
-    name: "{{ item }}"
+    name: "{{ postfix_service }}"
     state: started
     enabled: yes
-  with_items:
-    - "{{ postfix_service }}"
   when:
     - ansible_virtualization_type != "docker"
