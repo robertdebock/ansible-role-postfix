@@ -3,59 +3,110 @@ postfix
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-postfix.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-postfix)
 
-Provides Postfix for your system.
+Installs and configures postfix on your system. This role can be used for any type of SMTP server:
+- relayhost
+- endpoint
+- locally accepting
 
-[Unit tests](https://travis-ci.org/robertdebock/ansible-role-postfix) are done on every commit and periodically.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-postfix/issues)
+Example Playbook
+----------------
 
-To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
+This example is taken from `molecule/default/playbook.yml`:
 ```
-pip install molecule
-molecule test
+---
+- name: Converge
+  hosts: all
+  become: true
+  gather_facts: false
+
+  roles:
+    - robertdebock.bootstrap
+    - robertdebock.postfix
+
 ```
-There are many scenarios available, please have a look in the `molecule/` directory.
+
+Role Variables
+--------------
+
+These variables are set in `defaults/main.yml`:
+```
+---
+# defaults file for postfix
+
+# These settings are required in postfix.
+postfix_myhostname: "{{ ansible_fqdn }}"
+postfix_mydomain: "{{ ansible_domain | default ('localdomain', true) }}"
+postfix_myorigin: "{{ ansible_domain | default ('localdomain', true) }}"
+
+# To "listen" on public interfaces, set inet_interfaces to something like
+# "all" or the name of the interface, such as "eth0".
+postfix_inet_inferfaces: "loopback-only"
+
+# The distination tells Postfix what mails to accept mail for.
+postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
+
+# To accept email from other machines, set the mynetworks to something like
+# "192.168.0.0/24".
+postfix_mynetworks: "127.0.0.0/8"
+
+# These settings change the role of the postfix server to a relay host.
+# postfix_relay_domains: "$mydestination"
+
+# If you want to forward emails to another central relay server, set relayhost.
+# use brackets to sent to the A-record of the relayhost.
+# postfix_relayhost: [relay.example.com]
+
+# Set the restrictions for receiving mails.
+postfix_smtpd_recipient_restrictions:
+  - permit_mynetworks
+  - permit_sasl_authenticated
+  - reject_unauth_destination
+  - reject_invalid_hostname
+  - reject_non_fqdn_hostname
+  - reject_non_fqdn_sender
+  - reject_non_fqdn_recipient
+  - reject_unknown_sender_domain
+  - reject_unknown_recipient_domain
+  - reject_rbl_client sbl.spamhaus.org
+  - reject_rbl_client cbl.abuseat.org
+  - reject_rbl_client dul.dnsbl.sorbs.net
+  - permit
+
+# To enable spamassassin, ensure spamassassin is installed,
+# (hint: role: robertdebock.spamassassin) and set these two variables:
+# postfix_spamassassin: enabled
+# postfix_spamassassin_user: spamd
+
+# To enable clamav, ensure clamav is installed,
+# (hint: role: robertdebock.clamav) and set this variable:
+# postfix_clamav: enabled
+
+# To update all packages installed by this roles, set `postfix_package_state` to `latest`.
+postfix_package_state: present
+
+```
+
+Requirements
+------------
+
+- Access to a repository containing packages, likely on the internet.
+- A recent version of Ansible. (Tests run on the last 3 release of Ansible.)
+
+The following roles can be installed to ensure all requirements are met, using `ansible-galaxy install -r requirements.yml`:
+
+---
+- robertdebock.bootstrap
+
 
 Context
---------
+-------
+
 This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
 
 Here is an overview of related roles:
 ![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/postfix.png "Dependency")
 
-Requirements
-------------
-
-Access to a repository containing packages, likely on the internet.
-
-Role Variables
---------------
-
-
-- postfix_myhostname: The hostname.
-- postfix_mydomain: The domain.
-- postfix_myorigin: Maybe the domain.
-- postfix_inet_inferfaces: A list of interfaces to listen on.
-- postfix_mydestination: What domain to consider as the destination.
-- postfix_mynetworks: A list of networks to relay mail for.
-- postfix_relay_domains: Domains to relay.
-- postfix_relayhost: Where to send mails to as a relay hop.
-- postfix_smtpd_recipient_restrictions: A list of restrictions.
-- postfix_spamassassin: enable spamassassin or not
-- postfix_spamassassin_user: what user for spamassassin
-- postfix_clamav: enable clamav or not.
-
-Dependencies
-------------
-
-You can use this role to prepare your system.
-
-- [robertdebock.bootstrap](https://travis-ci.org/robertdebock/ansible-role-bootstrap)
-
-Download the dependencies by issuing this command:
-```
-ansible-galaxy install --role-file requirements.yml
-```
 
 Compatibility
 -------------
@@ -82,59 +133,26 @@ This role has been tested against the following distributions and Ansible versio
 
 A single star means the build may fail, it's marked as an experimental build.
 
-Example Playbook
-----------------
+Testing
+-------
 
-Basic configuration, using all defaults (See defaults/main.yml).
+[Unit tests](https://travis-ci.org/robertdebock/ansible-role-postfix) are done on every commit and periodically.
+
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-postfix/issues)
+
+To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
 ```
-- hosts: servers
-
-  roles:
-    - role: robertdebock.bootstrap
-    - role: robertdebock.postfix
+pip install molecule
+molecule test
 ```
+There are many specific scenarios available, please have a look in the `molecule/` directory.
 
-To configure postfix to relay all its email to a relayhost:
-```
-- hosts: servers
-
-  roles:
-    - role: robertdebock.bootstrap
-    - role: robertdebock.postfix
-      postfix_relayhost: "[relay.example.com]"
-```
-
-
-To configure postfix to receive all mail for example.com:
-```
-- hosts: mailserver
-
-  roles:
-    - role: robertdebock.bootstrap
-    - role: robertdebock.postfix
-      postfix_mydestination: "example.com, $mydomain, $myhostname, localhost.$mydomain, localhost"
-```
-
-To configure postfix to use spamassassin and clamav:
-```
-- hosts: mailserver
-
-  roles:
-    - role: robertdebock.bootstrap
-    - role: robertdebock.spamassassin
-    - role: robertdebock.clamav
-    - role: robertdebock.postfix
-      postfix_mydestination: "example.com, $mydomain, $myhostname, localhost.$mydomain, localhost"
-      postfix_spamassassin: enabled
-      postfix_clamav: enabled
-```
-
-Install this role using `galaxy install robertdebock.postfix`.
 
 License
 -------
 
-Apache License, Version 2.0
+Apache-2.0
+
 
 Author Information
 ------------------

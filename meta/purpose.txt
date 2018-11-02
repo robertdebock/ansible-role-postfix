@@ -1,0 +1,4 @@
+Installs and configures postfix on your system. This role can be used for any type of SMTP server:
+- relayhost
+- endpoint
+- locally accepting
