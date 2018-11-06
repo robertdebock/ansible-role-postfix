@@ -3,11 +3,7 @@ postfix
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-postfix.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-postfix)
 
-Installs and configures postfix on your system. This role can be used for any type of SMTP server:
-- relayhost
-- endpoint
-- locally accepting
-
+The purpose of this role is to install and configure postfix on your system.
 
 Example Playbook
 ----------------
