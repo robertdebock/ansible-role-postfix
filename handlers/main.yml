@@ -5,4 +5,4 @@
     name: "{{ postfix_service }}"
     state: restarted
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "docker" or postfix_ignore_docker
