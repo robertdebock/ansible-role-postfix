@@ -4,6 +4,9 @@
   package:
     name: "{{ postfix_packages }}"
     state: "{{ postfix_package_state }}"
+  register: postfix_install_postfix
+  until: postfix_install_postfix
+  retries: 3
 
 - name: create group
   group:
