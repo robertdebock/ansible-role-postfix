@@ -34,8 +34,10 @@ platforms:
     image: opensuse:leap
   - name: postfix-opensuse-tumbleweed
     image: opensuse:tumbleweed
-  - name: postfix-ubuntu-artful
-    image: ubuntu:artful
+  - name: postfix-ubuntu-latest
+    image: ubuntu:latest
+  - name: postfix-ubuntu-rolling
+    image: ubuntu:rolling
   - name: postfix-ubuntu-devel
     image: ubuntu:devel
   - name: postfix-ubuntu-latest
