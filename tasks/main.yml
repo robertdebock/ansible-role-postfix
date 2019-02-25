@@ -1,5 +1,15 @@
 ---
 # tasks file for postfix
+- name: check postfix_aliases
+  assert:
+    that:
+      - item.name is defined
+      - item.destination is defined
+  when:
+    - postfix_aliases is defined
+  with_items:
+    - "{{ postfix_aliases }}"
+
 - name: install postfix
   package:
     name: "{{ postfix_packages }}"
@@ -31,7 +41,7 @@
 
 - name: configure aliases
   lineinfile:
-    path: /etc/aliases
+    path: "{{ postfix_alias_path }}"
     regexp: "^{{ item.name }}:"
     line: "{{ item.name }}: {{ item.destination }}"
   when:
@@ -40,6 +50,8 @@
     - "{{ postfix_aliases }}"
   notify:
     - rebuild alias database
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: start and enable postfix
   service:

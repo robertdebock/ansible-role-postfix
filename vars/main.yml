@@ -12,3 +12,10 @@ postfix_daemon_directory:
   openSUSE Tumbleweed: /usr/lib/postfix
 
 postfix_group: postdrop
+
+_postfix_alias_path:
+  default: /etc/aliases
+  Alpine: /etc/postfix/aliases
+  Archlinux: /etc/postfix/aliases
+
+postfix_alias_path: "{{ _postfix_alias_path[ansible_distribution] | default(_postfix_alias_path['default']) }}"

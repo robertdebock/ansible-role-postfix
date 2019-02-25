@@ -8,4 +8,4 @@
     - ansible_virtualization_type != "docker" or postfix_ignore_docker
 
 - name: rebuild alias database
-  command: newaliases
+  command: postmap "{{ postfix_alias_path }}"
