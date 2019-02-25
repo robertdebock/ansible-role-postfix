@@ -6,3 +6,6 @@
     state: restarted
   when:
     - ansible_virtualization_type != "docker" or postfix_ignore_docker
+
+- name: rebuild alias database
+  command: newaliases
