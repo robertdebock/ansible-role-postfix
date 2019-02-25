@@ -16,6 +16,11 @@ This example is taken from `molecule/default/playbook.yml`:
   become: true
   gather_facts: false
 
+  vars:
+    postfix_aliases:
+      - name: root
+        destination: robert@meinit.nl
+
   roles:
     - robertdebock.bootstrap
     - robertdebock.postfix
@@ -79,6 +84,11 @@ postfix_smtpd_recipient_restrictions:
 # To enable clamav, ensure clamav is installed,
 # (hint: role: robertdebock.clamav) and set this variable:
 # postfix_clamav: enabled
+
+# You can configure aliases here. Typically redirecting `root` is a good plan.
+# postfix_aliases:
+#   - name: root
+#     destination: robert@meinit.nl
 
 # To update all packages installed by this roles, set `postfix_package_state` to `latest`.
 postfix_package_state: present
