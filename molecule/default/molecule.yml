@@ -32,8 +32,6 @@ platforms:
     image: fedora:rawhide
   - name: postfix-opensuse-leap
     image: opensuse:leap
-  - name: postfix-opensuse-tumbleweed
-    image: opensuse:tumbleweed
   - name: postfix-ubuntu-latest
     image: ubuntu:latest
   - name: postfix-ubuntu-rolling
