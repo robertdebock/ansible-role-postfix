@@ -13,7 +13,7 @@
 - name: install postfix
   package:
     name: "{{ postfix_packages }}"
-    state: "{{ postfix_package_state }}"
+    state: present
   register: postfix_install_postfix
   until: postfix_install_postfix
   retries: 3
@@ -59,4 +59,4 @@
     state: started
     enabled: yes
   when:
-    - ansible_virtualization_type != "docker" or postfix_ignore_docker
+    - ansible_virtualization_type != "docker"

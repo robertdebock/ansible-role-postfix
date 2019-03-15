@@ -24,7 +24,6 @@ This example is taken from `molecule/default/playbook.yml`:
   roles:
     - robertdebock.bootstrap
     - robertdebock.postfix
-
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -89,15 +88,6 @@ postfix_smtpd_recipient_restrictions:
 # postfix_aliases:
 #   - name: root
 #     destination: robert@meinit.nl
-
-# To update all packages installed by this roles, set `postfix_package_state` to `latest`.
-postfix_package_state: present
-
-# Some Docker containers do not allow managing services, rebooting and writing
-# to some locations in /etc. The role skips tasks that will typically fail in
-# Docker. With this parameter you can tell the role to -not- skip these tasks.
-postfix_ignore_docker: yes
-
 ```
 
 Requirements
