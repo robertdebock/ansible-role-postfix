@@ -1,8 +1,8 @@
 ---
-- name: Converge
+- name: Prepare
   hosts: all
-  become: true
-  gather_facts: false
+  become: yes
+  gather_facts: no
 
   vars:
     postfix_aliases:
@@ -11,4 +11,3 @@
 
   roles:
     - robertdebock.bootstrap
-    - ansible-role-postfix
