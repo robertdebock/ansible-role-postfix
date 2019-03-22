@@ -4,10 +4,5 @@
   become: yes
   gather_facts: no
 
-  vars:
-    postfix_aliases:
-      - name: root
-        destination: robert@meinit.nl
-
   roles:
     - robertdebock.bootstrap
