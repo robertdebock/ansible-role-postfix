@@ -7,8 +7,8 @@ postfix_service: postfix
 
 postfix_daemon_directory:
   default: /usr/libexec/postfix
-  Debian: /usr/lib/postfix
-  Ubuntu: /usr/lib/postfix
+  Debian: /usr/lib/postfix/sbin
+  Ubuntu: /usr/lib/postfix/sbin
   openSUSE Leap: /usr/lib/postfix
 
 postfix_group: postdrop
