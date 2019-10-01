@@ -1,15 +1,5 @@
 ---
 # tasks file for postfix
-- name: check postfix_aliases
-  assert:
-    that:
-      - item.name is defined
-      - item.destination is defined
-  when:
-    - postfix_aliases is defined
-  with_items:
-    - "{{ postfix_aliases }}"
-
 - name: install postfix
   package:
     name: "{{ postfix_packages }}"
