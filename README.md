@@ -6,8 +6,8 @@ postfix
 
 Install and configure postfix on your system.
 
-<img src="https://img.shields.io/ansible/role/d/"/>
-<img src="https://img.shields.io/ansible/quality/"/>
+<img src="https://img.shields.io/ansible/role/d/22976"/>
+<img src="https://img.shields.io/ansible/quality/22976"/>
 
 Example Playbook
 ----------------
