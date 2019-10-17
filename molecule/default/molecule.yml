@@ -8,61 +8,18 @@ lint:
 driver:
   name: docker
 platforms:
-  - name: postfix-alpine-edge
-    image: alpine:edge
-    pre_build_image: yes
-    command: sh -c "while true ; do sleep 1 ; done"
-  - name: postfix-alpine-latest
-    image: alpine:latest
-    pre_build_image: yes
-    command: sh -c "while true ; do sleep 1 ; done"
-  - name: postfix-archlinux
-    image: archlinux/base
-    pre_build_image: yes
-  - name: postfix-centos-6
-    image: centos:6
-    pre_build_image: yes
-  - name: postfix-centos-latest
-    image: centos:latest
-    pre_build_image: yes
-  - name: postfix-debian-stable
-    image: debian:stable
-    pre_build_image: yes
-  - name: postfix-debian-unstable
-    image: debian:unstable
-    pre_build_image: yes
-  - name: postfix-fedora-latest
-    image: fedora:latest
-    pre_build_image: yes
-  - name: postfix-fedora-rawhide
-    image: fedora:rawhide
-    pre_build_image: yes
-  - name: postfix-opensuse-leap
-    image: opensuse/leap
-    pre_build_image: yes
-  - name: postfix-ubuntu-latest
-    image: ubuntu:latest
-    pre_build_image: yes
-  - name: postfix-ubuntu-rolling
-    image: ubuntu:rolling
-    pre_build_image: yes
-  - name: postfix-ubuntu-devel
-    image: ubuntu:devel
+  - name: "instance-${TOX_ENVNAME:-default}"
+    image: "${distribution:-robertdebock/docker-fedora-systemd:latest}"
+    command: sh -c "while true ; do sleep 30 ; done"
     pre_build_image: yes
 provisioner:
   name: ansible
   playbooks:
-    prepare: ../resources/prepare.yml
-    converge: ../resources/playbook.yml
+    prepare: prepare.yml
+    converge: playbook.yml
   inventory:
-    host_vars:
-      postfix-fedora-latest:
+    group_vars:
+      all:
         ansible_python_interpreter: /usr/bin/python3
-      postfix-fedora-rawhide:
-        ansible_python_interpreter: /usr/bin/python3
-  config_options:
-    defaults:
-      stdout_callback: yaml
-      bin_ansible_callbacks: true
 scenario:
   name: default
