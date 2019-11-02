@@ -43,6 +43,16 @@
   loop_control:
     label: "{{ item.name }}"
 
+- name: set group owner
+  file:
+    path: "{{ item }}"
+    group: "{{ postfix_group }}"
+  with_items:
+    - /usr/sbin/postqueue
+    - /usr/sbin/postdrop
+    - /var/spool/postfix/public
+    - /var/spool/postfix/maildrop
+
 - name: start and enable postfix
   service:
     name: "{{ postfix_service }}"
