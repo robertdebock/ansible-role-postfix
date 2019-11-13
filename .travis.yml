@@ -20,7 +20,6 @@ env:
     - image="centos"
     - image="fedora"
     - image="fedora" tag="rawhide"
-    - image="opensuse"
     - image="ubuntu"
 
 matrix:

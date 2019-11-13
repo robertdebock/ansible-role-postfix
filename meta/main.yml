@@ -24,28 +24,19 @@ galaxy_info:
     - name: Fedora
       versions:
         - all
-    - name: OpenSUSE
-      versions:
-        - all
     - name: Ubuntu
       versions:
         - artful
         - bionic
 
   galaxy_tags:
-    - alpine
-    - archlinux
     - centos
-    - debian
-    - fedora
     - installer
     - mailserver
-    - opensuse
     - package
     - postfix
     - rhel
     - security
     - system
-    - ubuntu
 
 dependencies: []
