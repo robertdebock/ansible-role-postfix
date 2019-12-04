@@ -161,7 +161,6 @@ Some variarations of the build matrix do not work. These are the variations and 
 | opensuse | Not idempotent on configure postfix (main.cf) and configure postfix |
 
 
-
 Testing
 -------
 
