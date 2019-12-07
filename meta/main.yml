@@ -35,7 +35,7 @@ galaxy_info:
     - mailserver
     - package
     - postfix
-    - rhel
+    - redhat
     - security
     - system
 
