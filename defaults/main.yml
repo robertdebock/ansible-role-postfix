@@ -43,6 +43,9 @@ postfix_smtpd_recipient_restrictions:
   - reject_rbl_client dul.dnsbl.sorbs.net
   - permit
 
+postfix_smtpd_sender_restrictions:
+  - reject_unknown_sender_domain
+
 # To enable spamassassin, ensure spamassassin is installed,
 # (hint: role: robertdebock.spamassassin) and set these two variables:
 # postfix_spamassassin: enabled
