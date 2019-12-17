@@ -59,3 +59,13 @@ postfix_smtpd_sender_restrictions:
 # postfix_aliases:
 #   - name: root
 #     destination: robert@meinit.nl
+
+# You can configure sender access controls here.
+# postfix_sender_access:
+#   - gooddomain.com OK
+#   - baddomain.com REJECT
+
+# You can configure recipient access controls here.
+# postfix_recipient_access:
+#   - gooddomain.com OK
+#   - baddomain.com REJECT

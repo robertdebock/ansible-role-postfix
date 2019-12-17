@@ -43,6 +43,34 @@
   loop_control:
     label: "{{ item.name }}"
 
+- name: configure sender_access
+  lineinfile:
+    path: "{{ postfix_sender_access_path }}"
+    regexp: "^{{ item.name }}:"
+    line: "{{ item.name }}: {{ item.destination }}"
+  when:
+    - sender_access is defined
+  with_items:
+    - "{{ postfix_sender_access }}"
+  notify:
+    - rebuild sender_access database
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: configure recipient_access
+  lineinfile:
+    path: "{{ postfix_recipient_access_path }}"
+    regexp: "^{{ item.name }}:"
+    line: "{{ item.name }}: {{ item.destination }}"
+  when:
+    - recipient_access is defined
+  with_items:
+    - "{{ postfix_recipient_access }}"
+  notify:
+    - rebuild recipient_access database
+  loop_control:
+    label: "{{ item.name }}"
+
 - name: set group owner
   file:
     path: "{{ item }}"
