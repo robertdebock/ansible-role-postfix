@@ -10,6 +10,9 @@ postfix_myorigin: "{{ ansible_domain | default ('localdomain', true) }}"
 # "all" or the name of the interface, such as "eth0".
 postfix_inet_interfaces: "loopback-only"
 
+# Enable IPv4, and IPv6 if supported - if IPV4 only set to ipv4
+postfix_inet_protocols: all
+
 # The distination tells Postfix what mails to accept mail for.
 postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 

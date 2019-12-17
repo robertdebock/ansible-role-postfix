@@ -121,7 +121,7 @@ myorigin = {{ postfix_myorigin }}
 inet_interfaces = {{ postfix_inet_interfaces }}
 
 # Enable IPv4, and IPv6 if supported
-inet_protocols = all
+inet_protocols = {{ postfix_inet_protocols }}
 
 # The proxy_interfaces parameter specifies the network interface
 # addresses that this mail system receives mail on by way of a
