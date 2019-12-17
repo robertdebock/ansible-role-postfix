@@ -8,7 +8,7 @@ postfix_myorigin: "{{ ansible_domain | default ('localdomain', true) }}"
 
 # To "listen" on public interfaces, set inet_interfaces to something like
 # "all" or the name of the interface, such as "eth0".
-postfix_inet_inferfaces: "loopback-only"
+postfix_inet_interfaces: "loopback-only"
 
 # The distination tells Postfix what mails to accept mail for.
 postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
