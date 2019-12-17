@@ -118,10 +118,10 @@ myorigin = {{ postfix_myorigin }}
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
 #inet_inferfaces = localhost
-inet_interfaces = {{ postfix_inet_inferfaces }}
+inet_interfaces = {{ postfix_inet_interfaces }}
 
 # Enable IPv4, and IPv6 if supported
-inet_protocols = all
+inet_protocols = {{ postfix_inet_protocols }}
 
 # The proxy_interfaces parameter specifies the network interface
 # addresses that this mail system receives mail on by way of a
@@ -309,6 +309,10 @@ relay_domains = {{ postfix_relay_domains }}
 
 {% if postfix_smtpd_recipient_restrictions is defined %}
 smtpd_recipient_restrictions = {% for smtpd_recipient_restriction in postfix_smtpd_recipient_restrictions %}{{ smtpd_recipient_restriction }}, {% endfor %}
+{% endif %}
+
+{% if postfix_smtpd_sender_restrictions is defined %}
+smtpd_sender_restrictions = {% for smtpd_sender_restriction in postfix_smtpd_sender_restrictions %}{{ smtpd_sender_restriction }}, {% endfor %}
 {% endif %}
 
 # INTERNET OR INTRANET
@@ -698,7 +702,7 @@ sample_directory = /usr/share/doc/postfix-2.10.1/samples
 readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES
 
 # content_filter: An optional filter to classify content.
-{% if postfix_clamav is defined %}
+{% if postfix_clamav is defined and postfix_clamav == "enabled" %}
 content_filter = scan:127.0.0.1:10025
 receive_override_options = no_address_mappings
 {% endif %}
