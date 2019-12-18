@@ -24,8 +24,8 @@ postfix_mynetworks: "127.0.0.0/8"
 # postfix_relay_domains: "$mydestination"
 
 # If you want to forward emails to another central relay server, set relayhost.
-# brackets are automatically added to sent to the A-record of the relayhost, IP or dns name.
-# postfix_relayhost: relay.example.com
+# use brackets to sent to the A-record of the relayhost.
+# postfix_relayhost: [relay.example.com]
 
 # Set the restrictions for receiving mails.
 postfix_smtpd_recipient_restrictions:
