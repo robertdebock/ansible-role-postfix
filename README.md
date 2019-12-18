@@ -57,7 +57,7 @@ postfix_myorigin: "{{ ansible_domain | default ('localdomain', true) }}"
 
 # To "listen" on public interfaces, set inet_interfaces to something like
 # "all" or the name of the interface, such as "eth0".
-postfix_inet_inferfaces: "loopback-only"
+postfix_inet_interfaces: "loopback-only"
 
 # The distination tells Postfix what mails to accept mail for.
 postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
@@ -102,6 +102,20 @@ postfix_smtpd_recipient_restrictions:
 # postfix_aliases:
 #   - name: root
 #     destination: robert@meinit.nl
+
+# You can configure sender access controls here.
+#postfix_sender_access:
+#  - domain: gooddomain.com
+#    action: OK
+#  - domain: baddomain.com
+#    action: REJECT
+
+# You can configure recipient access controls here.
+#postfix_recipient_access:
+#  - domain: gooddomain.com
+#    action: OK
+#  - domain: baddomain.com
+#    action: REJECT
 ```
 
 Requirements

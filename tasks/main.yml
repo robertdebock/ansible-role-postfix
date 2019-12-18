@@ -46,30 +46,32 @@
 - name: configure sender_access
   lineinfile:
     path: "{{ postfix_sender_access_path }}"
-    regexp: "^{{ item.name }}:"
-    line: "{{ item.name }}: {{ item.destination }}"
+    regexp: "^{{ item.domain }}"
+    line: "{{ item.domain }} {{ item.action }}"
+    create: yes
   when:
-    - sender_access is defined
+    - postfix_sender_access is defined
   with_items:
     - "{{ postfix_sender_access }}"
   notify:
     - rebuild sender_access database
   loop_control:
-    label: "{{ item.name }}"
+    label: "{{ item.domain }}"
 
 - name: configure recipient_access
   lineinfile:
     path: "{{ postfix_recipient_access_path }}"
-    regexp: "^{{ item.name }}:"
-    line: "{{ item.name }}: {{ item.destination }}"
+    regexp: "^{{ item.domain }}"
+    line: "{{ item.domain }} {{ item.action }}"
+    create: yes
   when:
-    - recipient_access is defined
+    - postfix_recipient_access is defined
   with_items:
     - "{{ postfix_recipient_access }}"
   notify:
     - rebuild recipient_access database
   loop_control:
-    label: "{{ item.name }}"
+    label: "{{ item.domain }}"
 
 - name: set group owner
   file:
@@ -84,5 +86,5 @@
 - name: start and enable postfix
   service:
     name: "{{ postfix_service }}"
-    state: started
+    state: restarted
     enabled: yes

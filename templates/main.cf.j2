@@ -117,7 +117,7 @@ myorigin = {{ postfix_myorigin }}
 #inet_interfaces = all
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
-#inet_inferfaces = localhost
+#inet_interfaces = localhost
 inet_interfaces = {{ postfix_inet_interfaces }}
 
 # Enable IPv4, and IPv6 if supported
@@ -345,7 +345,7 @@ smtpd_sender_restrictions = check_sender_access hash:{{ postfix_sender_access_pa
 #relayhost = uucphost
 #relayhost = [an.ip.add.ress]
 {% if postfix_relayhost is defined %}
-relayhost = {{ postfix_relayhost }}
+relayhost = [{{ postfix_relayhost }}]
 {% endif %}
 
 # REJECTING UNKNOWN RELAY USERS
