@@ -59,6 +59,9 @@ postfix_myorigin: "{{ ansible_domain | default ('localdomain', true) }}"
 # "all" or the name of the interface, such as "eth0".
 postfix_inet_interfaces: "loopback-only"
 
+# Enable IPv4, and IPv6 if supported - if IPV4 only set to ipv4
+postfix_inet_protocols: all
+
 # The distination tells Postfix what mails to accept mail for.
 postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 
@@ -89,6 +92,9 @@ postfix_smtpd_recipient_restrictions:
   - reject_rbl_client dul.dnsbl.sorbs.net
   - permit
 
+postfix_smtpd_sender_restrictions:
+  - reject_unknown_sender_domain
+
 # To enable spamassassin, ensure spamassassin is installed,
 # (hint: role: robertdebock.spamassassin) and set these two variables:
 # postfix_spamassassin: enabled
@@ -102,20 +108,6 @@ postfix_smtpd_recipient_restrictions:
 # postfix_aliases:
 #   - name: root
 #     destination: robert@meinit.nl
-
-# You can configure sender access controls here.
-#postfix_sender_access:
-#  - domain: gooddomain.com
-#    action: OK
-#  - domain: baddomain.com
-#    action: REJECT
-
-# You can configure recipient access controls here.
-#postfix_recipient_access:
-#  - domain: gooddomain.com
-#    action: OK
-#  - domain: baddomain.com
-#    action: REJECT
 ```
 
 Requirements
