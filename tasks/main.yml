@@ -29,6 +29,9 @@
   notify:
     - restart postfix
 
+- name: force all notified handlers to run
+  meta: flush_handlers
+
 - name: configure aliases
   lineinfile:
     path: "{{ postfix_alias_path }}"
@@ -40,6 +43,7 @@
     - "{{ postfix_aliases }}"
   notify:
     - rebuild alias database
+    - restart postfix
   loop_control:
     label: "{{ item.name }}"
 
@@ -55,6 +59,7 @@
     - "{{ postfix_sender_access }}"
   notify:
     - rebuild sender_access database
+    - restart postfix
   loop_control:
     label: "{{ item.domain }}"
 
@@ -70,8 +75,12 @@
     - "{{ postfix_recipient_access }}"
   notify:
     - rebuild recipient_access database
+    - restart postfix
   loop_control:
     label: "{{ item.domain }}"
+
+- name: force all notified handlers to run
+  meta: flush_handlers
 
 - name: set group owner
   file:
