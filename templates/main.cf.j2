@@ -117,7 +117,7 @@ myorigin = {{ postfix_myorigin }}
 #inet_interfaces = all
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
-#inet_inferfaces = localhost
+#inet_interfaces = localhost
 inet_interfaces = {{ postfix_inet_interfaces }}
 
 # Enable IPv4, and IPv6 if supported
@@ -307,13 +307,22 @@ mynetworks = {{ postfix_mynetworks }}
 relay_domains = {{ postfix_relay_domains }}
 {% endif %}
 
-{% if postfix_smtpd_recipient_restrictions is defined %}
+{% if postfix_smtpd_recipient_restrictions is defined and postfix_recipient_access is not defined %}
 smtpd_recipient_restrictions = {% for smtpd_recipient_restriction in postfix_smtpd_recipient_restrictions %}{{ smtpd_recipient_restriction }}, {% endfor %}
 {% endif %}
 
-{% if postfix_smtpd_sender_restrictions is defined %}
+{% if postfix_smtpd_recipient_restrictions is defined and postfix_recipient_access is defined %}
+smtpd_recipient_restrictions = check_recipient_access hash:{{ postfix_recipient_access_path }}, {% for smtpd_recipient_restriction in postfix_smtpd_recipient_restrictions %}{{ smtpd_recipient_restriction }}, {% endfor %}
+{% endif %}
+
+{% if postfix_smtpd_sender_restrictions is defined and postfix_sender_access is not defined %}
 smtpd_sender_restrictions = {% for smtpd_sender_restriction in postfix_smtpd_sender_restrictions %}{{ smtpd_sender_restriction }}, {% endfor %}
 {% endif %}
+
+{% if postfix_smtpd_sender_restrictions is defined and postfix_sender_access is defined %}
+smtpd_sender_restrictions = check_sender_access hash:{{ postfix_sender_access_path }}, {% for smtpd_sender_restriction in postfix_smtpd_sender_restrictions %}{{ smtpd_sender_restriction }}, {% endfor %}
+{% endif %}
+
 
 # INTERNET OR INTRANET
 
@@ -336,7 +345,7 @@ smtpd_sender_restrictions = {% for smtpd_sender_restriction in postfix_smtpd_sen
 #relayhost = uucphost
 #relayhost = [an.ip.add.ress]
 {% if postfix_relayhost is defined %}
-relayhost = {{ postfix_relayhost }}
+relayhost = {{ postfix_relayhost|replace("'", "") }}
 {% endif %}
 
 # REJECTING UNKNOWN RELAY USERS
