@@ -17,7 +17,6 @@ postfix_group: postdrop
 _postfix_alias_path:
   default: /etc/aliases
   Alpine: /etc/postfix/aliases
-  Archlinux: /etc/postfix/aliases
 
 postfix_alias_path: "{{ _postfix_alias_path[ansible_os_family] | default(_postfix_alias_path['default']) }}"
 
