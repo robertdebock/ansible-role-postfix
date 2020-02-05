@@ -39,8 +39,7 @@
     line: "{{ item.name }}: {{ item.destination }}"
   when:
     - postfix_aliases is defined
-  with_items:
-    - "{{ postfix_aliases }}"
+  loop: "{{ postfix_aliases }}"
   notify:
     - rebuild alias database
     - restart postfix
@@ -55,8 +54,7 @@
     create: yes
   when:
     - postfix_sender_access is defined
-  with_items:
-    - "{{ postfix_sender_access }}"
+  loop: "{{ postfix_sender_access }}"
   notify:
     - rebuild sender_access database
     - restart postfix
@@ -71,8 +69,7 @@
     create: yes
   when:
     - postfix_recipient_access is defined
-  with_items:
-    - "{{ postfix_recipient_access }}"
+  loop: "{{ postfix_recipient_access }}"
   notify:
     - rebuild recipient_access database
     - restart postfix
@@ -86,7 +83,7 @@
   file:
     path: "{{ item }}"
     group: "{{ postfix_group }}"
-  with_items:
+  loop:
     - /usr/sbin/postqueue
     - /usr/sbin/postdrop
     - /var/spool/postfix/public
