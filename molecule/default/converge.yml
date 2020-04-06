@@ -10,4 +10,4 @@
         destination: robert@meinit.nl
 
   roles:
-    - ansible-role-postfix
+    - role: ansible-role-postfix

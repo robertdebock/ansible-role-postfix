@@ -22,7 +22,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         destination: robert@meinit.nl
 
   roles:
-    - robertdebock.postfix
+    - role: robertdebock.postfix
 ```
 
 The machine may need to be prepared using `molecule/resources/prepare.yml`:
