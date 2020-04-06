@@ -34,8 +34,8 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
   gather_facts: no
 
   roles:
-    - robertdebock.bootstrap
-    - robertdebock.core_dependencies
+    - role: robertdebock.bootstrap
+    - role: robertdebock.core_dependencies
 ```
 
 For verification `molecule/resources/verify.yml` run after the role has been applied.
