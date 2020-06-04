@@ -2,9 +2,9 @@
 
 Install and configure postfix on your system.
 
-|Travis|GitHub|Quality|Downloads|
-|------|------|-------|---------|
-|[![travis](https://travis-ci.com/robertdebock/ansible-role-postfix.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-postfix)|[![github](https://github.com/robertdebock/ansible-role-postfix/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-postfix/actions)|[![quality](https://img.shields.io/ansible/quality/22976)](https://galaxy.ansible.com/robertdebock/postfix)|[![downloads](https://img.shields.io/ansible/role/d/22976)](https://galaxy.ansible.com/robertdebock/postfix)|
+|Travis|GitHub|Quality|Downloads|Version|
+|------|------|-------|---------|-------|
+|[![travis](https://travis-ci.com/robertdebock/ansible-role-postfix.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-postfix)|[![github](https://github.com/robertdebock/ansible-role-postfix/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-postfix/actions)|[![quality](https://img.shields.io/ansible/quality/22976)](https://galaxy.ansible.com/robertdebock/postfix)|[![downloads](https://img.shields.io/ansible/role/d/22976)](https://galaxy.ansible.com/robertdebock/postfix)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-postfix.svg)](https://github.com/robertdebock/ansible-role-postfix/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
