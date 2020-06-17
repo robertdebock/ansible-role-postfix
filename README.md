@@ -62,8 +62,8 @@ These variables are set in `defaults/main.yml`:
 
 # These settings are required in postfix.
 postfix_myhostname: "{{ ansible_fqdn }}"
-postfix_mydomain: "{{ ansible_domain | default ('localdomain', true) }}"
-postfix_myorigin: "{{ ansible_domain | default ('localdomain', true) }}"
+postfix_mydomain: "{{ ansible_domain | default('localdomain', true) }}"
+postfix_myorigin: "{{ ansible_domain | default('localdomain', true) }}"
 
 # To "listen" on public interfaces, set inet_interfaces to something like
 # "all" or the name of the interface, such as "eth0".
