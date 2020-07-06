@@ -1,5 +1,6 @@
 ---
 # vars file for postfix
+
 postfix_packages:
   - postfix
 
