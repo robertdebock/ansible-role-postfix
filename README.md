@@ -16,13 +16,14 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
   become: yes
   gather_facts: yes
 
-  vars:
-    postfix_aliases:
-      - name: root
-        destination: robert@meinit.nl
-
   roles:
     - role: robertdebock.postfix
+      postfix_myhostname: "smtp.example.com"
+      postfix_mydomain: "example.com"
+      postfix_myorigin: "example.com"
+      postfix_aliases:
+        - name: root
+          destination: test@example.com
 ```
 
 The machine may need to be prepared using `molecule/resources/prepare.yml`:
@@ -47,8 +48,16 @@ For verification `molecule/resources/verify.yml` run after the role has been app
   gather_facts: yes
 
   tasks:
-    - name: check if connection still works
-      ping:
+    - name: check if port 25 is open
+      wait_for:
+        port: 25
+
+    - name: check if a mail can be sent
+      mail:
+        from: "Robert de Bock <robert@example.com>"
+        to: "Robert de Bock <root@example.com>"
+        subject: Testing robertdebock.postfix.
+        body: Testing the ansible role postfix.
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
