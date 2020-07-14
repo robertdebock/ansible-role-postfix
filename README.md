@@ -170,7 +170,6 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 
 |container|tags|
 |---------|----|
-|alpine|all|
 |amazon|2018.03|
 |el|7, 8|
 |debian|buster, bullseye|
@@ -190,6 +189,7 @@ Some variarations of the build matrix do not work. These are the variations and 
 | variation                 | reason                 |
 |---------------------------|------------------------|
 | opensuse | Not idempotent on configure postfix (main.cf) and configure postfix |
+| alpine | 451, 4.3.0 <root@example.com>: Temporary lookup failure |
 
 
 ## [Testing](#testing)
