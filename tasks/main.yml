@@ -95,6 +95,19 @@
     - /var/spool/postfix/public
     - /var/spool/postfix/maildrop
 
+- name: place selinux type enforcement
+  copy:
+    src: my-postfix.te
+    dest: /etc/my-postfix.te
+    mode: "0644"
+  notify:
+    - create selinux mod
+    - create selinux pp
+    - load selinux pp
+  when:
+    - ansible_selinux.status is defined
+    - ansible_selinux.status == "enabled"
+
 - name: start and enable postfix
   service:
     name: "{{ postfix_service }}"
