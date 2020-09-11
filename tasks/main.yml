@@ -101,9 +101,9 @@
     dest: /etc/my-postfix.te
     mode: "0644"
   notify:
-    - create selinux mod
-    - create selinux pp
-    - load selinux pp
+    - create selinux mod for postfix
+    - create selinux pp for postfix
+    - load selinux pp for postfix
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"

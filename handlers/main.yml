@@ -14,11 +14,11 @@
     name: "{{ postfix_service }}"
     state: restarted
 
-- name: create selinux mod
+- name: create selinux mod for postfix
   command: checkmodule -M -m -o /etc/my-postfix.mod /etc/my-postfix.te
 
-- name: create selinux pp
+- name: create selinux pp for postfix
   command: semodule_package -o /etc/my-postfix.pp -m /etc/my-postfix.mod
 
-- name: load selinux pp
+- name: load selinux pp for postfix
   command: semodule -i /etc/my-postfix.pp
