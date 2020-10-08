@@ -113,3 +113,6 @@
     name: "{{ postfix_service }}"
     state: started
     enabled: yes
+
+- name: flush handlers
+  meta: flush_handlers
