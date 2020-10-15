@@ -30,12 +30,10 @@ galaxy_info:
         - xenial
 
   galaxy_tags:
-    - centos
     - installer
     - mailserver
     - package
     - postfix
-    - redhat
     - security
     - system
 
