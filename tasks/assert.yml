@@ -1,4 +1,5 @@
 ---
+
 - name: test if postfix_myhostname is set correctly
   assert:
     that:
