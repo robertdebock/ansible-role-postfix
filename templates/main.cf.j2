@@ -344,7 +344,7 @@ smtpd_sender_restrictions = check_sender_access hash:{{ postfix_sender_access_pa
 #relayhost = [mailserver.isp.tld]
 #relayhost = uucphost
 #relayhost = [an.ip.add.ress]
-{% if postfix_relayhost is defined and postfix_relayhost | lenght > 0 %}
+{% if postfix_relayhost is defined and postfix_relayhost | length > 0 %}
 relayhost = {{ postfix_relayhost|replace("'", "") }}
 {% endif %}
 
