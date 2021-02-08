@@ -11,11 +11,6 @@
     name: "{{ postfix_packages }}"
     state: present
 
-- name: create group
-  group:
-    name: "{{ postfix_group }}"
-    state: present
-
 - name: configure postfix (main.cf)
   template:
     src: main.cf.j2
@@ -86,17 +81,6 @@
 
 - name: force all notified handlers to run
   meta: flush_handlers
-
-- name: set group owner
-  file:
-    path: "{{ item }}"
-    group: "{{ postfix_group }}"
-    mode: "0755"
-  loop:
-    - /usr/sbin/postqueue
-    - /usr/sbin/postdrop
-    - /var/spool/postfix/public
-    - /var/spool/postfix/maildrop
 
 - name: place selinux type enforcement
   copy:
