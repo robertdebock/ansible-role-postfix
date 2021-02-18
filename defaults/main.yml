@@ -73,3 +73,6 @@ postfix_smtpd_sender_restrictions:
 #     action: OK
 #   - domain: baddomain.com
 #     action: REJECT
+
+# You can disable SSL/TLS versions here.
+# postfix_tls_protocols: '!SSLv2, !SSLv3, !TLSv1, !TLSv1.1'
