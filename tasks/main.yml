@@ -82,19 +82,6 @@
 - name: force all notified handlers to run
   ansible.builtin.meta: flush_handlers
 
-# - name: place selinux type enforcement
-#   ansible.builtin.copy:
-#     src: my-postfix.te
-#     dest: /etc/my-postfix.te
-#     mode: "0644"
-#   notify:
-#     - create selinux mod for postfix
-#     - create selinux pp for postfix
-#     - load selinux pp for postfix
-#   when:
-#     - ansible_selinux.status is defined
-#     - ansible_selinux.status == "enabled"
-
 - name: start and enable postfix
   ansible.builtin.service:
     name: "{{ postfix_service }}"
