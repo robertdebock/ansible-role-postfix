@@ -34,7 +34,7 @@ jobs:
       matrix:
         config:
           - image: "amazonlinux"
-            tag: "latest"
+            tag: "1"
           - image: "centos"
             tag: "7"
           - image: "centos"
