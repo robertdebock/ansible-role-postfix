@@ -18,6 +18,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
 
   roles:
     - role: robertdebock.postfix
+      postfix_relayhost: "[relay.example.com]"
       postfix_myhostname: "smtp.example.com"
       postfix_mydomain: "example.com"
       postfix_myorigin: "example.com"
@@ -72,7 +73,7 @@ postfix_mynetworks: "127.0.0.0/8"
 
 # If you want to forward emails to another central relay server, set relayhost.
 # use brackets to sent to the A-record of the relayhost.
-# postfix_relayhost: [relay.example.com]
+# postfix_relayhost: "[relay.example.com]"
 
 # Set the restrictions for receiving mails.
 postfix_smtpd_recipient_restrictions:
