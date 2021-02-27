@@ -18,7 +18,7 @@
     validate: postconf -d -c %s
     mode: "0644"
   notify:
-    - restart postfix
+    - reload postfix
 
 - name: configure postfix (master.cf)
   ansible.builtin.template:
@@ -43,7 +43,7 @@
   loop: "{{ postfix_aliases }}"
   notify:
     - rebuild alias database
-    - restart postfix
+    - reload postfix
   loop_control:
     label: "{{ item.name }}"
 
@@ -59,7 +59,7 @@
   loop: "{{ postfix_sender_access }}"
   notify:
     - rebuild sender_access database
-    - restart postfix
+    - reload postfix
   loop_control:
     label: "{{ item.domain }}"
 
@@ -75,7 +75,7 @@
   loop: "{{ postfix_recipient_access }}"
   notify:
     - rebuild recipient_access database
-    - restart postfix
+    - reload postfix
   loop_control:
     label: "{{ item.domain }}"
 
