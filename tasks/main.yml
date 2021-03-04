@@ -6,6 +6,15 @@
   run_once: yes
   delegate_to: localhost
 
+- name: pre-configure debian systems
+  ansible.builtin.debconf:
+    name: postfix
+    question: postfix/mydomain
+    value: "{{ postfix_mydomain }}"
+    vtype: string
+  when:
+    - ansible_os_family == "Debian"
+
 - name: install postfix
   ansible.builtin.package:
     name: "{{ postfix_packages }}"
