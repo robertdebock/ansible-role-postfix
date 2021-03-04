@@ -9,8 +9,8 @@
 - name: pre-configure debian systems
   ansible.builtin.debconf:
     name: postfix
-    question: postfix/mydomain
-    value: "{{ postfix_mydomain }}"
+    question: postfix/myhostname
+    value: "{{ postfix_myhostname }}"
     vtype: string
   when:
     - ansible_os_family == "Debian"
