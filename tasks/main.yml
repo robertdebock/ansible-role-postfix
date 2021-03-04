@@ -87,6 +87,3 @@
     name: "{{ postfix_service }}"
     state: started
     enabled: yes
-
-- name: flush handlers
-  ansible.builtin.meta: flush_handlers
