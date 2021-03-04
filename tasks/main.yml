@@ -9,7 +9,7 @@
 - name: pre-configure debian systems
   ansible.builtin.debconf:
     name: postfix
-    question: postfix/myhostname
+    question: postfix/mailname
     value: "{{ postfix_myhostname }}"
     vtype: string
   when:
