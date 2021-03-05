@@ -121,6 +121,9 @@ postfix_smtpd_sender_restrictions:
 #     action: OK
 #   - domain: baddomain.com
 #     action: REJECT
+
+# You can disable SSL/TLS versions here.
+# postfix_tls_protocols: '!SSLv2, !SSLv3, !TLSv1, !TLSv1.1'
 ```
 
 ## [Requirements](#requirements)
@@ -177,6 +180,11 @@ If you find issues, please register them in [GitHub](https://github.com/robertde
 
 Apache-2.0
 
+## [Contributors](#contributors)
+
+I'd like to thank everybody that made contributions to this repository. It motivates me, improves the code and is just fun to collaborate.
+
+- [benformosa](https://github.com/benformosa)
 
 ## [Author Information](#author-information)
 

@@ -716,7 +716,7 @@ content_filter = scan:127.0.0.1:10025
 receive_override_options = no_address_mappings
 {% endif %}
 
-{% if postfix_tls_protocols is defined and postfix_tls_protocols | length > 0 %}
+{% if postfix_tls_protocols is defined %}
 # smtpd_tls_mandatory_protcols: TLS protocols accepted by the Postfix SMTP
 # server with mandatory TLS encryption.
 #
