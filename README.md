@@ -20,6 +20,8 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
     - role: robertdebock.postfix
       postfix_relayhost: "[relay.example.com]"
       postfix_myhostname: "smtp.example.com"
+      postfix_mydomain: "example.com"
+      postfix_myorigin: "example.com"
       postfix_aliases:
         - name: root
           destination: test@example.com

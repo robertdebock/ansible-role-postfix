@@ -7,11 +7,6 @@
   delegate_to: localhost
 
 - name: pre-configure debian systems
-  # ansible.builtin.debconf:
-  #   name: postfix
-  #   question: postfix/mailname
-  #   vtype: string
-  #   value: "{{ postfix_myhostname }}"
   ansible.builtin.debconf:
     name: postfix
     question: postfix/main_mailer_type
