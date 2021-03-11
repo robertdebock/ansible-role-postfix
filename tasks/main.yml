@@ -20,6 +20,26 @@
     name: "{{ postfix_packages }}"
     state: present
 
+- name: configure postfix (transport_maps)
+  ansible.builtin.template:
+    src: "{{ postfix_transport_maps_template }}"
+    dest: /etc/postfix/transport
+    mode: "0644"
+  notify:
+    - rebuild transport_maps database
+  when:
+    - postfix_transport_maps_template is defined
+
+- name: configure postfix (header_checks)
+  ansible.builtin.template:
+    src: "{{ postfix_header_checks_template }}"
+    dest: /etc/postfix/header_checks
+    mode: "0644"
+  notify:
+    - reload postfix
+  when:
+    - postfix_header_checks_template is defined
+
 - name: configure postfix (main.cf)
   ansible.builtin.template:
     src: main.cf.j2
