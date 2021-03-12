@@ -124,6 +124,12 @@ postfix_smtpd_sender_restrictions:
 
 # You can disable SSL/TLS versions here.
 # postfix_tls_protocols: '!SSLv2, !SSLv3, !TLSv1, !TLSv1.1'
+
+# You can supply a transport_maps Jinja2 template here
+# postfix_transport_maps_template: /path/to/transport.j2
+
+# You can supply a header_checks Jinja2 template here
+# postfix_header_checks_template: /path/to/header_checks.j2
 ```
 
 ## [Requirements](#requirements)
@@ -185,6 +191,7 @@ Apache-2.0
 I'd like to thank everybody that made contributions to this repository. It motivates me, improves the code and is just fun to collaborate.
 
 - [benformosa](https://github.com/benformosa)
+- [justin-p](https://github.com/justin-p)
 
 ## [Author Information](#author-information)
 
