@@ -165,7 +165,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |amazon|2018.03|
 |el|7, 8|
 |debian|buster, bullseye|
-|fedora|32, 33|
+|fedora|all|
 |ubuntu|focal, bionic|
 
 The minimum version of Ansible required is 2.10, tests have been done to:
@@ -196,6 +196,7 @@ I'd like to thank everybody that made contributions to this repository. It motiv
 
 - [benformosa](https://github.com/benformosa)
 - [justin-p](https://github.com/justin-p)
+- [Obihoernchen](https://github.com/Obihoernchen)
 
 ## [Author Information](#author-information)
 
