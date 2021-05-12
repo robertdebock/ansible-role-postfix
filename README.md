@@ -152,6 +152,9 @@ postfix_smtp_tls_security_level: none
 
 # Optional lookup tables with all valid addresses in the domains that match $virtual_mailbox_domains.
 # postfix_virtual_mailbox_maps: mysql:/etc/postfix/mysql-virtual_mailbox_maps.cf
+
+# Postfix is final destination for the specified list of domains; mail is delivered via the $virtual_transport mail delivery transport
+postfix_virtual_mailbox_domains: "$virtual_mailbox_maps"
 ```
 
 ## [Requirements](#requirements)
