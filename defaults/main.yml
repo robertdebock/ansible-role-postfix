@@ -89,3 +89,6 @@ postfix_smtp_tls_security_level: none
 
 # You can supply a header_checks Jinja2 template here
 # postfix_header_checks_template: /path/to/header_checks.j2
+
+# Whether or not to use the local biff service.
+# postfix_biff: yes

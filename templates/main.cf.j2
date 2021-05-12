@@ -739,3 +739,7 @@ smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
 {% if postfix_transport_maps_template is defined %}
 transport_maps = hash:/etc/postfix/transport
 {% endif %}
+
+{% if postfix_biff is defined %}
+bifff = {{ postfix_biff }}
+{% endif %}

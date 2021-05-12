@@ -79,3 +79,11 @@
       - postfix_smtp_tls_security_level is string
       - postfix_smtp_tls_security_level in [ "dane", "encrypt", "fingerprint", "may", "none", "secure", "verify" ]
     quiet: yes
+
+- name: test if postfix_biff is set correctly
+  ansible.builtin.assert:
+    that:
+      - postfix_biff is boolean
+    quiet: yes
+  when:
+    - postfix_biff is defined
