@@ -28,6 +28,14 @@
       - postfix_inet_interfaces is string
     quiet: yes
 
+- name: test if postfix_banner is set correctly
+  ansible.builtin.assert:
+    that:
+      - postfix_banner is string
+    quiet: yes
+  when:
+    - postfix_banner is defined
+
 - name: test if postfix_mydestination is set correctly
   ansible.builtin.assert:
     that:

@@ -607,6 +607,7 @@ header_checks = regexp:/etc/postfix/header_checks
 #
 #smtpd_banner = $myhostname ESMTP $mail_name
 #smtpd_banner = $myhostname ESMTP $mail_name ($mail_version)
+smtpd_banner = {{ postfix_banner }}
 
 # PARALLEL DELIVERY TO THE SAME DESTINATION
 #
