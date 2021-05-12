@@ -87,3 +87,11 @@
     quiet: yes
   when:
     - postfix_biff is defined
+
+- name: test if postfix_append_dot_mydomain is set correctly
+  ansible.builtin.assert:
+    that:
+      - postfix_append_dot_mydomain is boolean
+    quiet: yes
+  when:
+    - postfix_append_dot_mydomain is defined

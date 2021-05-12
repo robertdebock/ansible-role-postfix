@@ -92,3 +92,6 @@ postfix_smtp_tls_security_level: none
 
 # Whether or not to use the local biff service.
 # postfix_biff: yes
+
+# With locally submitted mail, append the string ".$mydomain" to addresses that have no ".domain" information
+# postfix_append_dot_mydomain: no

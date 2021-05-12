@@ -743,3 +743,7 @@ transport_maps = hash:/etc/postfix/transport
 {% if postfix_biff is defined %}
 bifff = {{ postfix_biff }}
 {% endif %}
+
+{% if postfix_append_dot_mydomain is defined %}
+append_dot_mydomain = {{ postfix_append_dot_mydomain }}
+{% endif %}
