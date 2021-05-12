@@ -763,3 +763,7 @@ virtual_mailbox_maps = {{ postfix_virtual_mailbox_maps }}
 {% if postfix_virtual_mailbox_domains is defined %}
 virtual_mailbox_domains = {{ postfix_virtual_mailbox_domains }}
 {% endif %}
+
+{% if postfix_virtual_alias_domains is defined %}
+virtual_alias_domains = {{ postfix_virtual_alias_domains }}
+{% endif %}
