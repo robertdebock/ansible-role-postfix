@@ -154,10 +154,13 @@ postfix_smtp_tls_security_level: none
 # postfix_virtual_mailbox_maps: mysql:/etc/postfix/mysql-virtual_mailbox_maps.cf
 
 # Postfix is final destination for the specified list of domains; mail is delivered via the $virtual_transport mail delivery transport
-postfix_virtual_mailbox_domains: "$virtual_mailbox_maps"
+# postfix_virtual_mailbox_domains: "$virtual_mailbox_maps"
 
 # Postfix is final destination for the specified list of virtual alias domains, that is, domains for which all addresses are aliased to addresses in other local or remote domains.
-postfix_virtual_alias_domains: "$virtual_alias_maps"
+# postfix_virtual_alias_domains: "$virtual_alias_maps"
+
+# Optional lookup tables that alias specific mail addresses or domains to other local or remote address.
+# postix_virtual_alias_maps: "$virtual_maps"
 ```
 
 ## [Requirements](#requirements)
