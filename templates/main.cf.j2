@@ -771,3 +771,11 @@ virtual_alias_domains = {{ postfix_virtual_alias_domains }}
 {% if postix_virtual_alias_maps is defined %}
 virtual_alias_maps = {{ postix_virtual_alias_maps }}
 {% endif %}
+
+{% if postfix_virtual_uid_maps is defined %}
+virtual_uid_maps = {{ postfix_virtual_uid_maps }}
+{% endif %}
+
+{% if postfix_virtual_gid_maps is defined %}
+virtual_gid_maps = {{ postfix_virtual_gid_maps }}
+{% endif %}
