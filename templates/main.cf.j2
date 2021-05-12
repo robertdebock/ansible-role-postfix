@@ -747,3 +747,7 @@ bifff = {{ postfix_biff }}
 {% if postfix_append_dot_mydomain is defined %}
 append_dot_mydomain = {{ postfix_append_dot_mydomain }}
 {% endif %}
+
+{% if postfix_alias_maps is defined %}
+alias_maps = {{ postfix_alias_maps }}
+{% endif %}

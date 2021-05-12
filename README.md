@@ -143,6 +143,9 @@ postfix_smtp_tls_security_level: none
 
 # With locally submitted mail, append the string ".$mydomain" to addresses that have no ".domain" information
 # postfix_append_dot_mydomain: no
+
+# The alias databases that are used for local(8) delivery
+# postfix_alias_maps: "hash:/etc/aliases"
 ```
 
 ## [Requirements](#requirements)

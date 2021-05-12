@@ -95,3 +95,11 @@
     quiet: yes
   when:
     - postfix_append_dot_mydomain is defined
+
+- name: test if postfix_alias_maps is set correctly
+  ansible.builtin.assert:
+    that:
+      - postfix_alias_maps is string
+    quiet: yes
+  when:
+    - postfix_alias_maps is defined
