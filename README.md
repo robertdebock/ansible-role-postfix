@@ -146,6 +146,9 @@ postfix_smtp_tls_security_level: none
 
 # The alias databases that are used for local(8) delivery
 # postfix_alias_maps: "hash:/etc/aliases"
+
+# A prefix that the virtual(8) delivery agent prepends to all pathname results from $virtual_mailbox_maps table lookups.
+# postfix_virtual_mailbox_base: /var/mail
 ```
 
 ## [Requirements](#requirements)

@@ -103,3 +103,11 @@
     quiet: yes
   when:
     - postfix_alias_maps is defined
+
+- name: test if postfix_virtual_mailbox_base is set correctly
+  ansible.builtin.assert:
+    that:
+      - postfix_virtual_mailbox_base is string
+    quiet: yes
+  when:
+    - postfix_virtual_mailbox_base is defined

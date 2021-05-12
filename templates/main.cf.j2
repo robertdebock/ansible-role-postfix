@@ -751,3 +751,7 @@ append_dot_mydomain = {{ postfix_append_dot_mydomain }}
 {% if postfix_alias_maps is defined %}
 alias_maps = {{ postfix_alias_maps }}
 {% endif %}
+
+{% if postfix_virtual_mailbox_base is defined %}
+virtual_mailbox_base = {{ postfix_virtual_mailbox_base }}
+{% endif %}
