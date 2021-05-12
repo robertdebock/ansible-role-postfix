@@ -101,3 +101,6 @@ postfix_smtp_tls_security_level: none
 
 # A prefix that the virtual(8) delivery agent prepends to all pathname results from $virtual_mailbox_maps table lookups.
 # postfix_virtual_mailbox_base: /var/mail
+
+# Optional lookup tables with all valid addresses in the domains that match $virtual_mailbox_domains.
+# postfix_virtual_mailbox_maps: mysql:/etc/postfix/mysql-virtual_mailbox_maps.cf
