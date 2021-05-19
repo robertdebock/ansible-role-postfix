@@ -320,7 +320,7 @@
 - name: test if postfix_maildrop_destination_recipient_limit is set correctly
   ansible.builtin.assert:
     that:
-      - postfix_maildrop_destination_recipient_limit is string
+      - postfix_maildrop_destination_recipient_limit is number
     quiet: yes
   when:
     - postfix_maildrop_destination_recipient_limit is defined
