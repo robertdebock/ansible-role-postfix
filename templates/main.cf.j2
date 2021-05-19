@@ -722,7 +722,6 @@ sample_directory = /usr/share/doc/postfix-2.10.1/samples
 readme_directory = {{ postfix_readme_directory }}
 {% endif %}
 
-
 # content_filter: An optional filter to classify content.
 {% if postfix_clamav is defined and postfix_clamav == "enabled" %}
 content_filter = scan:127.0.0.1:10025
