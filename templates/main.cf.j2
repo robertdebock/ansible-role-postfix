@@ -748,11 +748,11 @@ transport_maps = {{ postfix_transport_maps_template }}
 {% endif %}
 
 {% if postfix_biff is defined %}
-biff = {{ postfix_biff }}
+biff = {% if postfix_biff %}yes{% else %}no{% endif %}
 {% endif %}
 
 {% if postfix_append_dot_mydomain is defined %}
-append_dot_mydomain = {{ postfix_append_dot_mydomain }}
+append_dot_mydomain = {% if postfix_append_dot_mydomain %}yes{% else %}no{% endif %}
 {% endif %}
 
 {% if postfix_virtual_mailbox_base is defined %}
@@ -784,7 +784,7 @@ virtual_gid_maps = {{ postfix_virtual_gid_maps }}
 {% endif %}
 
 {% if postfix_smtpd_sasl_auth_enable is defined %}
-smtpd_sasl_auth_enable = {{ postfix_smtpd_sasl_auth_enable }}
+smtpd_sasl_auth_enable = {% if postfix_smtpd_sasl_auth_enable %}yes{% else %}no{% endif %}
 {% endif %}
 
 {% if postfix_smtpd_sasl_local_domain is defined %}
@@ -796,11 +796,12 @@ smtpd_sasl_security_options = {{ postfix_smtpd_sasl_security_options }}
 {% endif %}
 
 {% if postfix_smtpd_sasl_authenticated_header is defined %}
-smtpd_sasl_authenticated_header = {{ postfix_smtpd_sasl_authenticated_header }}
+smtpd_sasl_authenticated_header = {% if postfix_smtpd_sasl_authenticated_header %}yes{% else %}no{% endif %}
 {% endif %}
 
 {% if postfix_broken_sasl_auth_clients is defined %}
-broken_sasl_auth_clients = {{ postfix_broken_sasl_auth_clients }}
+broken_sasl_auth_clients = {% if postfix_broken_sasl_auth_clients %}yes{% else %}no{% endif %}
+
 {% endif %}
 
 {% if postfix_smtpd_tls_cert_file is defined %}
@@ -812,7 +813,7 @@ smtpd_tls_key_file = {{ postfix_smtpd_tls_key_file }}
 {% endif %}
 
 {% if postfix_smtpd_tls_received_header is defined %}
-smtpd_tls_received_header = {{ postfix_smtpd_tls_received_header }}
+smtpd_tls_received_header = {% if postfix_smtpd_tls_received_header %}yes{% else %}no{% endif %}
 {% endif %}
 
 {% if postfix_smtpd_tls_security_level is defined %}
@@ -820,7 +821,7 @@ smtpd_tls_security_level = {{ postfix_smtpd_tls_security_level }}
 {% endif %}
 
 {% if postfix_smtpd_tls_ask_ccert is defined %}
-smtpd_tls_ask_ccert = {{ postfix_smtpd_tls_ask_ccert }}
+smtpd_tls_ask_ccert = {% if postfix_smtpd_tls_ask_ccert %}yes{% else %}no{% endif %}
 {% endif %}
 
 {% if postfix_smtpd_tls_loglevel is defined %}
@@ -868,7 +869,7 @@ message_size_limit = {{ postfix_message_size_limit }}
 {% endif %}
 
 {% if postfix_smtpd_helo_required is defined %}
-smtpd_helo_required = {{ postfix_smtpd_helo_required }}
+smtpd_helo_required = {% if postfix_smtpd_helo_required %}yes{% else %}no{% endif %}
 {% endif %}
 
 {% if postfix_anvil_rate_time_unit is defined %}
