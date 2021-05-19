@@ -220,7 +220,7 @@
 - name: test if postfix_smtpd_tls_received_header is set correctly
   ansible.builtin.assert:
     that:
-      - postfix_smtpd_tls_received_header is string
+      - postfix_smtpd_tls_received_header is boolean
     quiet: yes
   when:
     - postfix_smtpd_tls_received_header is defined
