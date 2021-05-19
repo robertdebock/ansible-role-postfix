@@ -317,14 +317,6 @@
   when:
     - postfix_virtual_transport is defined
 
-- name: test if postfix_maildrop_destination_recipient_limit is set correctly
-  ansible.builtin.assert:
-    that:
-      - postfix_maildrop_destination_recipient_limit is number
-    quiet: yes
-  when:
-    - postfix_maildrop_destination_recipient_limit is defined
-
 - name: test if postfix_home_mailbox is set correctly
   ansible.builtin.assert:
     that:

@@ -748,7 +748,7 @@ transport_maps = {{ postfix_transport_maps_template }}
 {% endif %}
 
 {% if postfix_biff is defined %}
-bifff = {{ postfix_biff }}
+biff = {{ postfix_biff }}
 {% endif %}
 
 {% if postfix_append_dot_mydomain is defined %}
@@ -857,10 +857,6 @@ smtp_tls_mandatory_protocols = {{ postfix_smtp_tls_mandatory_protocols }}
 
 {% if postfix_virtual_transport is defined %}
 virtual_transport = {{ postfix_virtual_transport }}
-{% endif %}
-
-{% if postfix_maildrop_destination_recipient_limit is defined %}
-maildrop_destination_recipient_limit = {{ postfix_maildrop_destination_recipient_limit }}
 {% endif %}
 
 {% if postfix_home_mailbox is defined %}
