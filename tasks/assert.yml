@@ -196,7 +196,7 @@
 - name: test if postfix_broken_sasl_auth_clients is set correctly
   ansible.builtin.assert:
     that:
-      - postfix_broken_sasl_auth_clients is string
+      - postfix_broken_sasl_auth_clients is boolean
     quiet: yes
   when:
     - postfix_broken_sasl_auth_clients is defined
