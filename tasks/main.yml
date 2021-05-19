@@ -25,6 +25,7 @@
     src: "{{ postfix_transport_maps_template }}"
     dest: /etc/postfix/transport
     mode: "0644"
+    validate: postfix check %s
   notify:
     - rebuild transport_maps database
   when:
