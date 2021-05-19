@@ -745,7 +745,7 @@ smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
 # Optional lookup tables with mappings from recipient address to (message delivery transport, next-hop destination).
 # transport_maps = hash:/etc/postfix/transport
 {% if postfix_transport_maps_template is defined %}
-transport_maps = hash:/etc/postfix/transport
+transport_maps = {{ postfix_transport_maps_template }}
 {% endif %}
 
 {% if postfix_biff is defined %}
@@ -833,7 +833,7 @@ smtpd_tls_session_cache_database = {{ postfix_smtpd_tls_session_cache_database }
 {% endif %}
 
 {% if postfix_smtp_tls_cert_file is defined %}
-smtp_tls_cert_file = {{ postfix_smtp_tls_cert_file
+smtp_tls_cert_file = {{ postfix_smtp_tls_cert_file }}
 {% endif %}
 
 {% if postfix_smtp_tls_key_file is defined %}
@@ -845,7 +845,7 @@ smtp_tls_session_cache_database = {{ postfix_smtp_tls_session_cache_database }}
 {% endif %}
 
 {% if postfix_tls_random_source is defined %}
-tls_random_source = {{ postfix_tls_random_source
+tls_random_source = {{ postfix_tls_random_source }}
 {% endif %}
 
 {% if postfix_smtpd_tls_mandatory_protocols is defined %}
