@@ -744,7 +744,7 @@ smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
 # Optional lookup tables with mappings from recipient address to (message delivery transport, next-hop destination).
 # transport_maps = hash:/etc/postfix/transport
 {% if postfix_transport_maps_template is defined %}
-transport_maps = {{ postfix_transport_maps_template }}
+transport_maps = hash:/etc/postfix/transport
 {% endif %}
 
 {% if postfix_biff is defined %}
