@@ -18,7 +18,7 @@
     cmd: postmap /etc/postfix/transport
 
 - name: validate configuration
-  command:
+  ansible.builtin.command:
     cmd: postconf
   changed_when: no
 

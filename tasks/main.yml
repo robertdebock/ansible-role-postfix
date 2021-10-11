@@ -71,7 +71,7 @@
     - validate configuration
     - restart postfix
 
-- name: force all notified handlers to run
+- name: flush handlers
   ansible.builtin.meta: flush_handlers
 
 - name: configure aliases
@@ -122,7 +122,7 @@
   loop_control:
     label: "{{ item.domain }}"
 
-- name: force all notified handlers to run
+- name: flush handlers again
   ansible.builtin.meta: flush_handlers
 
 - name: start and enable postfix
