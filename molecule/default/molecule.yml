@@ -4,9 +4,9 @@
 #
 dependency:
   name: galaxy
-  options:
-    role-file: requirements.yml
-    collection-file: requirements.yml
+  # options:
+  #   role-file: requirements.yml
+  #   collection-file: requirements.yml
 lint: |
   set -e
   yamllint .
