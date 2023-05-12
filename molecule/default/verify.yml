@@ -5,11 +5,11 @@
   gather_facts: no
 
   tasks:
-    - name: check if port 25 is open
+    - name: Check if port 25 is open
       ansible.builtin.wait_for:
         port: 25
 
-    - name: check if a mail can be sent
+    - name: Check if a mail can be sent
       community.general.mail:
         from: "Robert de Bock <robert@example.com>"
         to: "Robert de Bock <root@example.com>"
