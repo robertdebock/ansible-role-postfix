@@ -5,6 +5,7 @@
     that:
       - postfix_myhostname is defined
       - postfix_myhostname is string
+      - postfix_myhostname is not none
     quiet: yes
 
 - name: assert | Test if postfix_mydomain is set correctly
@@ -12,6 +13,7 @@
     that:
       - postfix_mydomain is defined
       - postfix_mydomain is string
+      - postfix_mydomain is not none
     quiet: yes
 
 - name: assert | Test if postfix_myorigin is set correctly
@@ -19,6 +21,7 @@
     that:
       - postfix_myorigin is defined
       - postfix_myorigin is string
+      - postfix_myorigin is not none
     quiet: yes
 
 - name: assert | Test if postfix_inet_interfaces is set correctly
@@ -26,12 +29,14 @@
     that:
       - postfix_inet_interfaces is defined
       - postfix_inet_interfaces is string
+      - postfix_inet_interfaces is not none
     quiet: yes
 
 - name: assert | Test if postfix_banner is set correctly
   ansible.builtin.assert:
     that:
       - postfix_banner is string
+      - postfix_banner is not none
     quiet: yes
   when:
     - postfix_banner is defined
@@ -41,6 +46,7 @@
     that:
       - postfix_mydestination is defined
       - postfix_mydestination is iterable or postfix_mydestination is string
+      - postfix_mydestination is not none
     quiet: yes
 
 - name: assert | Test if postfix_mynetworks is set correctly
@@ -48,6 +54,7 @@
     that:
       - postfix_mynetworks is defined
       - postfix_mynetworks is iterable or postfix_mynetworks is string
+      - postfix_mynetworks is not none
     quiet: yes
 
 - name: assert | Test if postfix_smtpd_recipient_restrictions is set correctly
@@ -68,6 +75,7 @@
   ansible.builtin.assert:
     that:
       - postfix_tls_protocols is string
+      - postfix_tls_protocols is not none
     quiet: yes
   when:
     - postfix_tls_protocols is defined
@@ -100,6 +108,7 @@
   ansible.builtin.assert:
     that:
       - postfix_alias_maps is string
+      - postfix_alias_maps is not none
     quiet: yes
   when:
     - postfix_alias_maps is defined
@@ -108,6 +117,7 @@
   ansible.builtin.assert:
     that:
       - postfix_virtual_mailbox_base is string
+      - postfix_virtual_mailbox_base is not none
     quiet: yes
   when:
     - postfix_virtual_mailbox_base is defined
@@ -116,6 +126,7 @@
   ansible.builtin.assert:
     that:
       - postfix_virtual_mailbox_maps is string
+      - postfix_virtual_mailbox_maps is not none
     quiet: yes
   when:
     - postfix_virtual_mailbox_maps is defined
@@ -124,6 +135,7 @@
   ansible.builtin.assert:
     that:
       - postfix_virtual_mailbox_domains is string
+      - postfix_virtual_mailbox_domains is not none
     quiet: yes
   when:
     - postfix_virtual_mailbox_domains is defined
@@ -132,6 +144,7 @@
   ansible.builtin.assert:
     that:
       - postfix_virtual_alias_domains is string
+      - postfix_virtual_alias_domains is not none
     quiet: yes
   when:
     - postfix_virtual_alias_domains is defined
@@ -140,6 +153,7 @@
   ansible.builtin.assert:
     that:
       - postfix_virtual_alias_maps is string
+      - postfix_virtual_alias_maps is not none
     quiet: yes
   when:
     - postfix_virtual_alias_maps is defined
@@ -148,6 +162,7 @@
   ansible.builtin.assert:
     that:
       - postfix_virtual_uid_maps is string
+      - postfix_virtual_uid_maps is not none
     quiet: yes
   when:
     - postfix_virtual_uid_maps is defined
@@ -156,6 +171,7 @@
   ansible.builtin.assert:
     that:
       - postfix_virtual_gid_maps is string
+      - postfix_virtual_gid_maps is not none
     quiet: yes
   when:
     - postfix_virtual_gid_maps is defined
@@ -172,6 +188,7 @@
   ansible.builtin.assert:
     that:
       - postfix_smtpd_sasl_local_domain is string
+      - postfix_smtpd_sasl_local_domain is not none
     quiet: yes
   when:
     - postfix_smtpd_sasl_local_domain is defined
@@ -205,6 +222,7 @@
   ansible.builtin.assert:
     that:
       - postfix_smtpd_tls_cert_file is string
+      - postfix_smtpd_tls_cert_file is not none
     quiet: yes
   when:
     - postfix_smtpd_tls_cert_file is defined
@@ -213,6 +231,7 @@
   ansible.builtin.assert:
     that:
       - postfix_smtpd_tls_key_file is string
+      - postfix_smtpd_tls_key_file is not none
     quiet: yes
   when:
     - postfix_smtpd_tls_key_file is defined
@@ -255,6 +274,7 @@
   ansible.builtin.assert:
     that:
       - postfix_smtpd_tls_session_cache_database is string
+      - postfix_smtpd_tls_session_cache_database is not none
     quiet: yes
   when:
     - postfix_smtpd_tls_session_cache_database is defined
@@ -263,6 +283,7 @@
   ansible.builtin.assert:
     that:
       - postfix_smtp_tls_cert_file is string
+      - postfix_smtp_tls_cert_file is not none
     quiet: yes
   when:
     - postfix_smtp_tls_cert_file is defined
@@ -271,6 +292,7 @@
   ansible.builtin.assert:
     that:
       - postfix_smtp_tls_key_file is string
+      - postfix_smtp_tls_key_file is not none
     quiet: yes
   when:
     - postfix_smtp_tls_key_file is defined
@@ -279,6 +301,7 @@
   ansible.builtin.assert:
     that:
       - postfix_smtp_tls_session_cache_database is string
+      - postfix_smtp_tls_session_cache_database is not none
     quiet: yes
   when:
     - postfix_smtp_tls_session_cache_database is defined
@@ -287,6 +310,7 @@
   ansible.builtin.assert:
     that:
       - postfix_tls_random_source is string
+      - postfix_tls_random_source is not none
     quiet: yes
   when:
     - postfix_tls_random_source is defined
@@ -313,6 +337,7 @@
   ansible.builtin.assert:
     that:
       - postfix_virtual_transport is string
+      - postfix_virtual_transport is not none
     quiet: yes
   when:
     - postfix_virtual_transport is defined
@@ -321,6 +346,7 @@
   ansible.builtin.assert:
     that:
       - postfix_home_mailbox is string
+      - postfix_home_mailbox is not none
     quiet: yes
   when:
     - postfix_home_mailbox is defined
@@ -345,6 +371,7 @@
   ansible.builtin.assert:
     that:
       - postfix_anvil_rate_time_unit is string
+      - postfix_anvil_rate_time_unit is not none
     quiet: yes
   when:
     - postfix_anvil_rate_time_unit is defined
@@ -369,6 +396,7 @@
   ansible.builtin.assert:
     that:
       - postfix_bounce_queue_lifetime is string
+      - postfix_bounce_queue_lifetime is not none
     quiet: yes
   when:
     - postfix_bounce_queue_lifetime is defined
@@ -377,6 +405,7 @@
   ansible.builtin.assert:
     that:
       - postfix_readme_directory is string
+      - postfix_readme_directory is not none
     quiet: yes
   when:
     - postfix_readme_directory is defined
@@ -385,6 +414,7 @@
   ansible.builtin.assert:
     that:
       - postfix_html_directory is string
+      - postfix_html_directory is not none
     quiet: yes
   when:
     - postfix_html_directory is defined
