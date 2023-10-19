@@ -165,6 +165,21 @@
   loop_control:
     label: "{{ item.name }}"
 
+- name: Configure smtp_generics
+  ansible.builtin.lineinfile:
+    path: "{{ postfix_smtp_generic_path }}"
+    regexp: "^{{ item.envelope_or_header_address }}\s"
+    line: "{{ item.envelope_or_header_address }} {{ item.sender_address }}"
+    mode: "0644"
+  when:
+    - postfix_smtp_generic is defined
+  loop: "{{ postfix_smtp_generic }}"
+  notify:
+    - Rebuild smtp_generic database
+    - Reload postfix
+  loop_control:
+    label: "{{ item.envelope_or_header_address }}"
+
 - name: Configure sender_access
   ansible.builtin.lineinfile:
     path: "{{ postfix_sender_access_path }}"
