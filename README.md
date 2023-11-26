@@ -1,4 +1,4 @@
-# Ansible role [postfix](#postfix)
+# [Ansible role postfix](#postfix)
 
 Install and configure postfix on your system.
 
