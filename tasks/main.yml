@@ -198,6 +198,16 @@
   loop_control:
     label: "{{ item.domain }}"
 
+- name: Place sasl_password_map
+  ansible.builtin.copy:
+    content: "{{ postfix_smtp_sasl_password_map_content }}"
+    dest: /etc/postfix/sasl_passwd
+    mode: "0600"
+  when:
+    - postfix_smtp_sasl_password_map is defined
+  notify:
+    - Rebuild sasl_password_map database
+
 - name: Flush handlers again
   ansible.builtin.meta: flush_handlers
 

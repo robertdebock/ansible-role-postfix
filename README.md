@@ -19,7 +19,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   roles:
     - role: robertdebock.postfix
-      postfix_relayhost: "[relay.example.com]"
+      # postfix_relayhost: "[relay.example.com]"
       postfix_myhostname: "smtp.example.com"
       postfix_mydomain: "example.com"
       postfix_myorigin: "example.com"
@@ -29,6 +29,16 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       postfix_aliases:
         - name: root
           destination: test@example.com
+      # Ziggo settings: ("email-address" and "email-password" are placeholders)
+      postfix_relayhost: "[smtp.ziggo.nl]:587"
+      postfix_smtp_use_tls: yes
+      postfix_smtp_sasl_auth_enable: yes
+      postfix_smtp_sasl_password_map: hash:/etc/postfix/relay_pass
+      postfix_smtp_sasl_security_options: ""
+      postfix_smtp_tls_wrappermode: yes
+      postfix_smtp_tls_security_level: encrypt
+      postfix_smtp_sasl_password_map_content: |
+        [smtp.ziggo.nl]:587 email-address:email-password
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-postfix/blob/master/molecule/default/prepare.yml):
@@ -269,6 +279,13 @@ postfix_smtp_tls_security_level: none
 # Postfix used `/etc/services` to map service names to port numbers like `2525`.
 # So either specifcy a port number or a service name like `smtp`.
 postfix_smtp_listen_port: smtp
+
+postfix_smtp_use_tls: no
+postfix_smtp_sasl_auth_enable: no
+postfix_smtp_sasl_password_map: ""
+postfix_smtp_sasl_security_options: ""
+postfix_smtp_tls_wrappermode: no
+postfix_smtp_sasl_password_map_content: ""
 ```
 
 ## [Requirements](#requirements)

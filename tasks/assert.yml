@@ -425,3 +425,55 @@
       - postfix_smtp_listen_port is number or
         postfix_smtp_listen_port is string
     quiet: yes
+
+- name: assert | Test postfix_smtp_use_tls
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_use_tls is boolean
+    quiet: yes
+  when:
+    - postfix_smtp_use_tls is defined
+
+- name: assert | Test postfix_smtp_sasl_auth_enable
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_sasl_auth_enable is boolean
+    quiet: yes
+  when:
+    - postfix_smtp_sasl_auth_enable is defined
+
+- name: assert | Test postfix_smtp_sasl_password_map
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_sasl_password_map is string
+      - postfix_smtp_sasl_password_map is not none
+    quiet: yes
+  when:
+    - postfix_smtp_sasl_password_map is defined
+
+- name: assert | Test postfix_smtp_sasl_security_options
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_sasl_security_options is string
+      - postfix_smtp_sasl_security_options in [ "noplaintext", "noactive", "nodictionary", "noanonymous", "mutual_auth" ]
+    quiet: yes
+  when:
+    - postfix_smtp_sasl_security_options is defined
+    - postfix_smtp_sasl_security_options != ""
+
+- name: assert | Test postfix_smtp_tls_wrappermode
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_tls_wrappermode is boolean
+    quiet: yes
+  when:
+    - postfix_smtp_tls_wrappermode is defined
+
+- name: assert | Test postfix_smtp_sasl_password_map_content
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_sasl_password_map_content is string
+      - postfix_smtp_sasl_password_map_content is not none
+    quiet: yes
+  when:
+    - postfix_smtp_sasl_password_map_content is defined
