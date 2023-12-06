@@ -33,10 +33,10 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       postfix_relayhost: "[smtp.ziggo.nl]:587"
       postfix_smtp_use_tls: yes
       postfix_smtp_sasl_auth_enable: yes
-      postfix_smtp_sasl_password_map: hash:/etc/postfix/relay_pass
+      postfix_smtp_sasl_password_map: "hash:/etc/postfix/relay_pass"
       postfix_smtp_sasl_security_options: ""
-      postfix_smtp_tls_wrappermode: yes
-      postfix_smtp_tls_security_level: encrypt
+      postfix_smtp_tls_wrappermode: no
+      postfix_smtp_tls_security_level: may
       postfix_smtp_sasl_password_map_content: |
         [smtp.ziggo.nl]:587 email-address:email-password
 ```
