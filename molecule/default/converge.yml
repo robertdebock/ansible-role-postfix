@@ -1,8 +1,8 @@
 ---
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   roles:
     - role: ansible-role-postfix
@@ -18,11 +18,11 @@
           destination: test@example.com
       # Ziggo settings: ("email-address" and "email-password" are placeholders)
       postfix_relayhost: "[smtp.ziggo.nl]:587"
-      postfix_smtp_use_tls: yes
-      postfix_smtp_sasl_auth_enable: yes
+      postfix_smtp_use_tls: true
+      postfix_smtp_sasl_auth_enable: true
       postfix_smtp_sasl_password_map: "/etc/postfix/relay_pass"
       postfix_smtp_sasl_security_options: ""
-      postfix_smtp_tls_wrappermode: no
+      postfix_smtp_tls_wrappermode: false
       postfix_smtp_tls_security_level: may
       postfix_smtp_sasl_password_map_content: |
         [smtp.ziggo.nl]:587 email-address:email-password
