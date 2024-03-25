@@ -436,7 +436,7 @@ alias_maps = {{ postfix_alias_maps }}
 #
 #alias_database = dbm:/etc/aliases
 #alias_database = dbm:/etc/mail/aliases
-alias_database = hash:/etc/aliases
+alias_database = hash:{{ postfix_alias_path }}
 #alias_database = hash:/etc/aliases, hash:/opt/majordomo/aliases
 
 # ADDRESS EXTENSIONS (e.g., user+foo)
