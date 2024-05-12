@@ -426,14 +426,6 @@
         postfix_smtp_listen_port is string
     quiet: true
 
-- name: assert | Test postfix_smtp_use_tls
-  ansible.builtin.assert:
-    that:
-      - postfix_smtp_use_tls is boolean
-    quiet: true
-  when:
-    - postfix_smtp_use_tls is defined
-
 - name: assert | Test postfix_smtp_sasl_auth_enable
   ansible.builtin.assert:
     that:
