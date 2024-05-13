@@ -142,8 +142,14 @@ postfix_smtp_tls_security_level: none
 # File with the Postfix SMTP server RSA certificate in PEM format.
 # postfix_smtpd_tls_cert_file: /etc/letsencrypt/live/smtp.syhosting.ch/cert.pem
 
+# Local file with the Postfix SMTP server RSA certificate in PEM format which shall be copied to the target host.
+# postfix_smtpd_tls_cert_file_source: ./certs/cert.pem
+
 # File with the Postfix SMTP server RSA private key in PEM format.
 # postfix_smtpd_tls_key_file: /etc/letsencrypt/live/smtp.syhosting.ch/privkey.pem
+
+# Local file with the Postfix SMTP server RSA private key in PEM format which shall be copied to the target host.
+# postfix_smtpd_tls_key_file_source: ./certs/privkey.pem
 
 # Request that the Postfix SMTP server produces Received: message headers that include information about the protocol and cipher used, as well as the remote SMTP client CommonName and client certificate issuer CommonName.
 # postfix_smtpd_tls_received_header: true
