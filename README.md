@@ -31,7 +31,6 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           destination: test@example.com
       # Ziggo settings: ("email-address" and "email-password" are placeholders)
       postfix_relayhost: "[smtp.ziggo.nl]:587"
-      postfix_smtp_use_tls: true
       postfix_smtp_sasl_auth_enable: true
       postfix_smtp_sasl_password_map: "/etc/postfix/relay_pass"
       postfix_smtp_sasl_security_options: ""
@@ -280,11 +279,11 @@ postfix_smtp_tls_security_level: none
 # So either specifcy a port number or a service name like `smtp`.
 postfix_smtp_listen_port: smtp
 
-postfix_smtp_use_tls: false
 postfix_smtp_sasl_auth_enable: false
 postfix_smtp_sasl_password_map: ""
 postfix_smtp_sasl_security_options: ""
 postfix_smtp_tls_wrappermode: false
+postfix_smtp_tls_security_level: may
 postfix_smtp_sasl_password_map_content: ""
 ```
 

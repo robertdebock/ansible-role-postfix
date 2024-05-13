@@ -204,7 +204,7 @@
     dest: "{{ postfix_smtp_sasl_password_map }}"
     mode: "0600"
   when:
-    - postfix_smtp_sasl_password_map is defined
+    - postfix_smtp_sasl_password_map is defined and postfix_smtp_sasl_password_map != ""
   notify:
     - Rebuild sasl_password_map database
 

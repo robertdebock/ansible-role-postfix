@@ -18,7 +18,6 @@
           destination: test@example.com
       # Ziggo settings: ("email-address" and "email-password" are placeholders)
       postfix_relayhost: "[smtp.ziggo.nl]:587"
-      postfix_smtp_use_tls: true
       postfix_smtp_sasl_auth_enable: true
       postfix_smtp_sasl_password_map: "/etc/postfix/relay_pass"
       postfix_smtp_sasl_security_options: ""
