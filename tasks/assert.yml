@@ -236,6 +236,17 @@
   when:
     - postfix_smtpd_tls_key_file is defined
 
+- name: assert | Test either postfix_smtpd_tls_cert_file_source and postfix_smtpd_tls_key_file_source are defined both or none
+  ansible.builtin.assert:
+    that:
+      - postfix_smtpd_tls_cert_file_source is string
+      - postfix_smtpd_tls_cert_file_source is not none
+      - postfix_smtpd_tls_key_file_source is string
+      - postfix_smtpd_tls_key_file_source is not none
+    quiet: true
+  when:
+    - postfix_smtpd_tls_cert_file_source is defined or postfix_smtpd_tls_key_file_source is defined
+
 - name: assert | Test postfix_smtpd_tls_received_header
   ansible.builtin.assert:
     that:
