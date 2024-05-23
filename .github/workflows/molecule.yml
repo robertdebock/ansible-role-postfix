@@ -32,8 +32,6 @@ jobs:
           - image: "amazonlinux"
             tag: "1"
           - image: "enterpriselinux"
-            tag: "7"
-          - image: "enterpriselinux"
             tag: "8"
           - image: "enterpriselinux"
             tag: "latest"

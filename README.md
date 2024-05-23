@@ -289,7 +289,6 @@ postfix_smtp_sasl_auth_enable: false
 postfix_smtp_sasl_password_map: ""
 postfix_smtp_sasl_security_options: ""
 postfix_smtp_tls_wrappermode: false
-postfix_smtp_tls_security_level: may
 postfix_smtp_sasl_password_map_content: ""
 ```
 
