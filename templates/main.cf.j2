@@ -439,6 +439,10 @@ alias_maps = {{ postfix_alias_maps }}
 alias_database = hash:/etc/aliases
 #alias_database = hash:/etc/aliases, hash:/opt/majordomo/aliases
 
+{% if postfix_smtp_generic is defined %}
+smtp_generic_maps = hash:{{ postfix_smtp_generic_path }}
+{% endif %}
+
 # ADDRESS EXTENSIONS (e.g., user+foo)
 #
 # The recipient_delimiter parameter specifies the separator between
