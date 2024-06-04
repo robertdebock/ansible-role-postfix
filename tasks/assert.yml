@@ -480,3 +480,11 @@
     quiet: true
   when:
     - postfix_smtp_sasl_password_map_content is defined
+
+- name: assert | Test postfix_master_custom
+  ansible.builtin.assert:
+    that:
+      - postfix_master_custom is iterable
+    quiet: true
+  when:
+    - postfix_master_custom is defined
