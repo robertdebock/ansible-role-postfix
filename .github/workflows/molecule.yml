@@ -29,8 +29,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - image: "amazonlinux"
-            tag: "1"
           - image: "enterpriselinux"
             tag: "latest"
           - image: "debian"
