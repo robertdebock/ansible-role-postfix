@@ -319,7 +319,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |container|tags|
 |---------|----|
 |[Amazon](https://hub.docker.com/r/robertdebock/amazonlinux)|2018.03|
-|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|all|
+|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|9|
 |[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
 |[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
