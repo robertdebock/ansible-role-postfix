@@ -16,6 +16,11 @@ _postfix_alias_path:
 
 postfix_alias_path: "{{ _postfix_alias_path[ansible_os_family] | default(_postfix_alias_path['default']) }}"
 
+_postfix_smtp_generic_path:
+  default: /etc/postfix/generic
+
+postfix_smtp_generic_path: "{{ _postfix_smtp_generic_path[ansible_os_family] | default(_postfix_smtp_generic_path['default']) }}"
+
 postfix_recipient_access_path: /etc/postfix/recipient_access
 
 postfix_sender_access_path: /etc/postfix/sender_access
