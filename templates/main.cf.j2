@@ -789,7 +789,9 @@ tls_append_default_CA = {{ postfix_tls_append_default_ca }}
 
 # Optional lookup tables with mappings from recipient address to (message delivery transport, next-hop destination).
 # transport_maps = lmdb:/etc/postfix/transport
-{% if postfix_transport_maps_template is defined %}
+{% if postfix_transport_maps_custom is defined %}
+transport_maps = {{ postfix_transport_maps_custom }}
+{% elif postfix_transport_maps_template is defined %}
 transport_maps = lmdb:/etc/postfix/transport
 {% endif %}
 
