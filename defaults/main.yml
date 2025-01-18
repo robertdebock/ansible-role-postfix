@@ -50,6 +50,18 @@ postfix_smtpd_recipient_restrictions:
 postfix_smtpd_sender_restrictions:
   - reject_unknown_sender_domain
 
+# Set the restrictions for client access.
+#postfix_smtpd_client_restrictions:
+#  - permit_mynetworks
+#  - reject_unknown_client
+#  - permit
+
+# Set the restrictions for relaying.
+#postfix_smtpd_relay_restrictions:
+#  - permit_mynetworks
+#  - permit_sasl_authenticated
+#  - defer_unauth_destination
+
 # The default SMTP TLS security level for the Postfix SMTP client
 # Valid values are: dane, encrypt, fingerprint, may, none, secure, verify
 postfix_smtp_tls_security_level: none
@@ -80,6 +92,20 @@ postfix_smtp_tls_security_level: none
 #   - domain: gooddomain.com
 #     action: OK
 #   - domain: baddomain.com
+#     action: REJECT
+
+# You can configure client access controls here.
+# postfix_client_access:
+#   - client: 192.168.1.10
+#     action: OK
+#   - client: 192.168.1.20
+#     action: REJECT
+
+# You can configure relay access controls here.
+# postfix_relay_access:
+#   - client: 192.168.1.10
+#     action: OK
+#   - client: 192.168.1.20
 #     action: REJECT
 
 # You can disable SSL/TLS versions here.
@@ -230,3 +256,20 @@ postfix_smtp_sasl_password_map: ""
 postfix_smtp_sasl_security_options: ""
 postfix_smtp_tls_wrappermode: false
 postfix_smtp_sasl_password_map_content: ""
+postfix_smtp_use_tls: "no"
+postfix_smtp_tls_note_starttls_offer: "no"
+postfix_smtp_tls_CAfile: ""
+postfix_smtp_tls_CApath: ""
+postfix_tls_append_default_CA: "no"
+
+postfix_smtp_sender_dependent_authentication: "no"
+postfix_sender_dependent_relayhost_map: ""
+postfix_sender_dependent_relayhost_map_content: ""
+
+postfix_sender_canonical_classes: "envelope_sender, header_sender"
+postfix_sender_canonical_map: ""
+postfix_sender_canonical_map_content: ""
+
+# Debugging options
+postfix_debug_peer_level: 2
+# postfix_debug_peer_list: []
