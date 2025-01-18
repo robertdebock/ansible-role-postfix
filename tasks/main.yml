@@ -62,6 +62,14 @@
       {% if postfix_sender_access is defined %}
       check_sender_access hash:{{ postfix_sender_access_path }},
       {% endif %}
+    _postfix_smtpd_client_restrictions_check_client_access: |
+      {% if postfix_client_access is defined %}
+      check_client_access hash:{{ postfix_client_access_path }},
+      {% endif %}
+    _postfix_smtpd_relay_restrictions_check_relay_access: |
+      {% if postfix_relay_access is defined %}
+      check_client_access hash:{{ postfix_relay_access_path }},
+      {% endif %}
 
 - name: "Setting values for main.cf (2/2)"
   ansible.builtin.set_fact:
@@ -104,6 +112,22 @@
       {{ _postfix_smtpd_sender_restrictions_check_sender_access | trim }} {{ postfix_smtpd_sender_restrictions }}
       {% elif postfix_smtpd_sender_restrictions is iterable and (postfix_smtpd_sender_restrictions is not string and postfix_smtpd_sender_restrictions is not mapping) %}
       {{ _postfix_smtpd_sender_restrictions_check_sender_access | trim }} {% for domain in postfix_smtpd_sender_restrictions %}{{ domain }}{% if not loop.last %}, {% endif %}{% endfor %}
+      {% endif %}
+      {% endif %}
+    _postfix_smtpd_client_restrictions: >-
+      {% if postfix_smtpd_client_restrictions is defined %}
+      {% if postfix_smtpd_client_restrictions is string %}
+      {{ _postfix_smtpd_client_restrictions_check_client_access | trim }} {{ postfix_smtpd_client_restrictions }}
+      {% elif postfix_smtpd_client_restrictions is iterable and (postfix_smtpd_client_restrictions is not string and postfix_smtpd_client_restrictions is not mapping) %}
+      {{ _postfix_smtpd_client_restrictions_check_client_access | trim }} {% for client in postfix_smtpd_client_restrictions %}{{ client }}{% if not loop.last %}, {% endif %}{% endfor %}
+      {% endif %}
+      {% endif %}
+    _postfix_smtpd_relay_restrictions: >-
+      {% if postfix_smtpd_relay_restrictions is defined %}
+      {% if postfix_smtpd_relay_restrictions is string %}
+      {{ _postfix_smtpd_relay_restrictions_check_relay_access | trim }} {{ postfix_smtpd_relay_restrictions }}
+      {% elif postfix_smtpd_relay_restrictions is iterable and (postfix_smtpd_relay_restrictions is not string and postfix_smtpd_relay_restrictions is not mapping) %}
+      {{ _postfix_smtpd_relay_restrictions_check_relay_access | trim }} {% for relay in postfix_smtpd_relay_restrictions %}{{ relay }}{% if not loop.last %}, {% endif %}{% endfor %}
       {% endif %}
       {% endif %}
     _postfix_virtual_mailbox_domains: >-
@@ -184,53 +208,117 @@
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 
-- name: Configure aliases
-  ansible.builtin.lineinfile:
-    path: "{{ postfix_alias_path }}"
-    regexp: "^{{ item.name }}:"
-    line: "{{ item.name }}: {{ item.destination }}"
-    mode: "0644"
-  when:
-    - postfix_aliases is defined
-  loop: "{{ postfix_aliases }}"
+- name: Ensure alias database exists
+  ansible.builtin.command:
+    cmd: postalias "{{ postfix_alias_path }}"
+    creates: "{{ postfix_alias_path }}.db"
   notify:
     - Rebuild alias database
     - Reload postfix
-  loop_control:
-    label: "{{ item.name }}"
+
+- name: Configure aliases
+  ansible.builtin.copy:
+    dest: "{{ postfix_alias_path }}"
+    content: |
+      {% for alias in postfix_aliases %}
+      {{ alias.name }}: {{ alias.destination }}
+      {% endfor %}
+    mode: "0644"
+  when:
+    - postfix_aliases is defined
+    - postfix_aliases | length > 0
+  notify:
+    - Validate configuration
+    - Rebuild alias database
+    - Reload postfix
 
 - name: Configure sender_access
-  ansible.builtin.lineinfile:
-    path: "{{ postfix_sender_access_path }}"
-    regexp: "^{{ item.domain }}"
-    line: "{{ item.domain }} {{ item.action }}"
-    create: true
+  ansible.builtin.copy:
+    dest: "{{ postfix_sender_access_path }}"
+    content: |
+      {% for entry in postfix_sender_access %}
+      {{ entry.domain }} {{ entry.action }}
+      {% endfor %}
     mode: "0644"
   when:
     - postfix_sender_access is defined
-  loop: "{{ postfix_sender_access }}"
+    - postfix_sender_access | length > 0
   notify:
+    - Validate configuration
     - Rebuild sender_access database
     - Reload postfix
-  loop_control:
-    label: "{{ item.domain }}"
 
 - name: Configure recipient_access
-  ansible.builtin.lineinfile:
-    path: "{{ postfix_recipient_access_path }}"
-    regexp: "^{{ item.domain }}"
-    line: "{{ item.domain }} {{ item.action }}"
-    create: true
+  ansible.builtin.copy:
+    dest: "{{ postfix_recipient_access_path }}"
+    content: |
+      {% for entry in postfix_recipient_access %}
+      {{ entry.domain }} {{ entry.action }}
+      {% endfor %}
     mode: "0644"
   when:
     - postfix_recipient_access is defined
-  loop: "{{ postfix_recipient_access }}"
+    - postfix_recipient_access | length > 0
   notify:
     - Validate configuration
     - Rebuild recipient_access database
     - Reload postfix
-  loop_control:
-    label: "{{ item.domain }}"
+
+- name: Configure client_access
+  ansible.builtin.copy:
+    dest: "{{ postfix_client_access_path }}"
+    content: |
+      {% for entry in postfix_client_access %}
+      {{ entry.client }} {{ entry.action }}
+      {% endfor %}
+    mode: "0644"
+  when:
+    - postfix_client_access is defined
+    - postfix_client_access | length > 0
+  notify:
+    - Validate configuration
+    - Rebuild client_access database
+    - Reload postfix
+
+- name: Configure relay_access
+  ansible.builtin.copy:
+    dest: "{{ postfix_relay_access_path }}"
+    content: |
+      {% for entry in postfix_relay_access %}
+      {{ entry.client }} {{ entry.action }}
+      {% endfor %}
+    mode: "0644"
+  when:
+    - postfix_relay_access is defined
+    - postfix_relay_access | length > 0
+  notify:
+    - Validate configuration
+    - Rebuild relay_access database
+    - Reload postfix
+
+- name: Place sender_dependent_relayhost_map
+  ansible.builtin.copy:
+    content: "{{ postfix_sender_dependent_relayhost_map_content }}"
+    dest: "{{ postfix_sender_dependent_relayhost_map }}"
+    mode: "0600"
+  when:
+    - postfix_sender_dependent_relayhost_map is defined and postfix_sender_dependent_relayhost_map != ""
+  notify:
+    - Validate configuration
+    - Rebuild sender_dependent_relayhost_map database
+    - Reload postfix
+
+- name: Place sender_canonical_map
+  ansible.builtin.copy:
+    content: "{{ postfix_sender_canonical_map_content }}"
+    dest: "{{ postfix_sender_canonical_map }}"
+    mode: "0600"
+  when:
+    - postfix_sender_canonical_map is defined and postfix_sender_canonical_map != ""
+  notify:
+    - Validate configuration
+    - Rebuild sender_canonical_map database
+    - Reload postfix
 
 - name: Place sasl_password_map
   ansible.builtin.copy:
@@ -240,7 +328,9 @@
   when:
     - postfix_smtp_sasl_password_map is defined and postfix_smtp_sasl_password_map != ""
   notify:
+    - Validate configuration
     - Rebuild sasl_password_map database
+    - Reload postfix
 
 - name: Flush handlers again
   ansible.builtin.meta: flush_handlers
@@ -250,3 +340,4 @@
     name: "{{ postfix_service }}"
     state: started
     enabled: true
+  when: not ansible_check_mode

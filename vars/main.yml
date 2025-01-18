@@ -20,6 +20,10 @@ postfix_recipient_access_path: /etc/postfix/recipient_access
 
 postfix_sender_access_path: /etc/postfix/sender_access
 
+postfix_client_access_path: /etc/postfix/client_access
+
+postfix_relay_access_path: /etc/postfix/relay_access
+
 _postfix_group:
   default: postdrop
   Suse: maildrop
