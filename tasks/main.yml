@@ -70,6 +70,10 @@
       {% if postfix_relay_access is defined %}
       check_client_access hash:{{ postfix_relay_access_path }},
       {% endif %}
+    _postfix_local_header_rewrite_clients_access: |
+      {% if postfix_local_header_rewrite_clients_access is defined %}
+      check_address_map hash:{{ postfix_local_header_rewrite_clients_access_path }},
+      {% endif %}
 
 - name: "Setting values for main.cf (2/2)"
   ansible.builtin.set_fact:
@@ -128,6 +132,14 @@
       {{ _postfix_smtpd_relay_restrictions_check_relay_access | trim }} {{ postfix_smtpd_relay_restrictions }}
       {% elif postfix_smtpd_relay_restrictions is iterable and (postfix_smtpd_relay_restrictions is not string and postfix_smtpd_relay_restrictions is not mapping) %}
       {{ _postfix_smtpd_relay_restrictions_check_relay_access | trim }} {% for relay in postfix_smtpd_relay_restrictions %}{{ relay }}{% if not loop.last %}, {% endif %}{% endfor %}
+      {% endif %}
+      {% endif %}
+    _postfix_local_header_rewrite_clients: >-
+      {% if postfix_local_header_rewrite_clients is defined %}
+      {% if postfix_local_header_rewrite_clients is string %}
+      {{ _postfix_local_header_rewrite_clients_access | trim }} {{ postfix_local_header_rewrite_clients }}
+      {% elif postfix_local_header_rewrite_clients is iterable and (postfix_local_header_rewrite_clients is not string and postfix_local_header_rewrite_clients is not mapping) %}
+      {{ _postfix_local_header_rewrite_clients_access | trim }} {% for client in postfix_local_header_rewrite_clients %}{{ client }}{% if not loop.last %}, {% endif %}{% endfor %}
       {% endif %}
       {% endif %}
     _postfix_virtual_mailbox_domains: >-
@@ -294,6 +306,22 @@
   notify:
     - Validate configuration
     - Rebuild relay_access database
+    - Reload postfix
+
+- name: Configure local_header_rewrite_clients_access
+  ansible.builtin.copy:
+    dest: "{{ postfix_local_header_rewrite_clients_access_path }}"
+    content: |
+      {% for entry in postfix_local_header_rewrite_clients_access %}
+      {{ entry.client }} {{ entry.action }}
+      {% endfor %}
+    mode: "0644"
+  when:
+    - postfix_local_header_rewrite_clients_access is defined
+    - postfix_local_header_rewrite_clients_access | length > 0
+  notify:
+    - Validate configuration
+    - Rebuild local_header_rewrite_clients_access database
     - Reload postfix
 
 - name: Place sender_dependent_relayhost_map

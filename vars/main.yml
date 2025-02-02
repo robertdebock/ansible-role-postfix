@@ -24,6 +24,8 @@ postfix_client_access_path: /etc/postfix/client_access
 
 postfix_relay_access_path: /etc/postfix/relay_access
 
+postfix_local_header_rewrite_clients_access_path: /etc/postfix/local_header_rewrite_clients
+
 _postfix_group:
   default: postdrop
   Suse: maildrop

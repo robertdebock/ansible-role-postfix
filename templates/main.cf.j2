@@ -336,6 +336,10 @@ smtpd_client_restrictions = {{ _postfix_smtpd_client_restrictions | trim }}
 smtpd_relay_restrictions = {{ _postfix_smtpd_relay_restrictions | trim }}
 {% endif -%}
 
+{% if _postfix_local_header_rewrite_clients != "" -%}
+local_header_rewrite_clients = {{ _postfix_local_header_rewrite_clients | trim }}
+{% endif -%}
+
 # INTERNET OR INTRANET
 
 # The relayhost parameter specifies the default host to send mail to
