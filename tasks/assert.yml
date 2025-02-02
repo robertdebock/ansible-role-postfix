@@ -80,6 +80,24 @@
   when:
     - postfix_tls_protocols is defined
 
+- name: assert | Test postfix_smtpd_client_restrictions
+  ansible.builtin.assert:
+    that:
+      - postfix_smtpd_client_restrictions is defined
+      - postfix_smtpd_client_restrictions is iterable
+    quiet: true
+  when:
+    - postfix_smtpd_client_restrictions is defined
+
+- name: assert | Test postfix_smtpd_relay_restrictions
+  ansible.builtin.assert:
+    that:
+      - postfix_smtpd_relay_restrictions is defined
+      - postfix_smtpd_relay_restrictions is iterable
+    quiet: true
+  when:
+    - postfix_smtpd_relay_restrictions is defined
+
 - name: assert | Test postfix_smtp_tls_security_level
   ansible.builtin.assert:
     that:
@@ -488,3 +506,18 @@
     quiet: true
   when:
     - postfix_master_custom is defined
+
+- name: Check postfix_debug_peer_level
+  assert:
+    that:
+      - postfix_debug_peer_level is defined
+      - postfix_debug_peer_level | int is not none
+    quiet: true
+  when: postfix_debug_peer_level is defined
+
+- name: Check postfix_debug_peer_list (optional)
+  assert:
+    that:
+      - postfix_debug_peer_list is iterable
+    quiet: true
+  when: postfix_debug_peer_list is defined
