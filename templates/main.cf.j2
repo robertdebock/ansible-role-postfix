@@ -750,7 +750,9 @@ smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
 
 # Optional lookup tables with mappings from recipient address to (message delivery transport, next-hop destination).
 # transport_maps = hash:/etc/postfix/transport
-{% if postfix_transport_maps_template is defined %}
+{% if postfix_transport_maps_custom is defined %}
+transport_maps = {{ postfix_transport_maps_custom }}
+{% elif postfix_transport_maps_template is defined %}
 transport_maps = hash:/etc/postfix/transport
 {% endif %}
 
@@ -771,11 +773,11 @@ virtual_mailbox_maps = {{ postfix_virtual_mailbox_maps }}
 {% endif %}
 
 {% if _postfix_virtual_mailbox_domains | trim != "<None>" %}
-virtual_alias_domains = {{ _postfix_virtual_mailbox_domains | trim }}
+virtual_mailbox_domains = {{ _postfix_virtual_mailbox_domains | trim }}
 {% endif %}
 
 {% if _postfix_virtual_alias_domains | trim != "<None>" %}
-virtual_mailbox_domains = {{ _postfix_virtual_alias_domains | trim }}
+virtual_alias_domains = {{ _postfix_virtual_alias_domains | trim }}
 {% endif %}
 
 {% if postix_virtual_alias_maps is defined %}
@@ -904,3 +906,13 @@ smtp_sasl_password_maps = hash:{{ postfix_smtp_sasl_password_map }}
 smtp_sasl_security_options = {{ postfix_smtp_sasl_security_options }}
 {% endif %}
 smtp_tls_wrappermode = {{ postfix_smtp_tls_wrappermode | ternary('yes', 'no') }}
+
+{% if postfix_smtpd_milters is defined and postfix_smtpd_milters != "" %}
+smtpd_milters = {{ postfix_smtpd_milters }}
+{% endif %}
+{% if postfix_non_smtpd_milters is defined and postfix_non_smtpd_milters != "" %}
+non_smtpd_milters = {{ postfix_non_smtpd_milters }}
+{% endif %}
+{% if postfix_milter_default_action is defined and postfix_milter_default_action != "" %}
+milter_default_action = {{ postfix_milter_default_action }}
+{% endif %}
