@@ -778,8 +778,8 @@ virtual_alias_domains = {{ _postfix_virtual_mailbox_domains | trim }}
 virtual_mailbox_domains = {{ _postfix_virtual_alias_domains | trim }}
 {% endif %}
 
-{% if postix_virtual_alias_maps is defined %}
-virtual_alias_maps = {{ postix_virtual_alias_maps }}
+{% if postfix_virtual_alias_maps is defined %}
+virtual_alias_maps = {{ postfix_virtual_alias_maps }}
 {% endif %}
 
 {% if postfix_virtual_uid_maps is defined %}

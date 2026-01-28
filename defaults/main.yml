@@ -113,7 +113,7 @@ postfix_smtp_tls_security_level: none
 # postfix_virtual_alias_domains: "$virtual_alias_maps"
 
 # Optional lookup tables that alias specific mail addresses or domains to other local or remote address.
-# postix_virtual_alias_maps: "$virtual_maps"
+# postfix_virtual_alias_maps: "$virtual_maps"
 
 # Lookup tables with the per-recipient user ID that the virtual(8) delivery agent uses while writing to the recipient's mailbox.
 # postfix_virtual_uid_maps: "static:2000"
