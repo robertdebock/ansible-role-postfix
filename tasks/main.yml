@@ -26,7 +26,7 @@
     name: postfix-mysql
     state: present
   when:
-    - (postfix_virtual_mailbox_maps is defined and "'mysql' in postfix_virtual_mailbox_maps) or
+    - (postfix_virtual_mailbox_maps is defined and 'mysql' in postfix_virtual_mailbox_maps) or
       (postfix_virtual_mailbox_domains is defined and 'mysql' in postfix_virtual_mailbox_domains) or
       (postfix_virtual_alias_maps is defined and 'mysql' in postfix_virtual_alias_maps)
 
