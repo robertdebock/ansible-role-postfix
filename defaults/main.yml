@@ -13,6 +13,9 @@ postfix_inet_interfaces: "loopback-only"
 # Enable IPv4, and IPv6 if supported - if IPV4 only set to ipv4
 postfix_inet_protocols: all
 
+# Set an address type preference for SMTP connection (Any, ipv4, ipv6)
+postfix_smtp_address_preference: any
+
 # Set a banner
 postfix_banner: "$myhostname ESMTP $mail_name"
 
