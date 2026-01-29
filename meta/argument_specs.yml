@@ -1,0 +1,427 @@
+---
+argument_specs:
+  main:
+    options:
+      postfix_myhostname:
+        type: str
+        required: true
+        description: The internet hostname of this mail system.
+
+      postfix_mydomain:
+        type: str
+        required: true
+        description: The local internet domain name.
+
+      postfix_myorigin:
+        type: str
+        required: true
+        description: The domain that locally-posted mail appears to come from.
+
+      postfix_inet_interfaces:
+        type: str
+        required: true
+        description: The network interface addresses that this mail system receives mail on.
+
+      postfix_inet_protocols:
+        type: str
+        required: false
+        default: all
+        description: Enable IPv4, and IPv6 if supported - if IPV4 only set to ipv4.
+
+      postfix_banner:
+        type: str
+        required: false
+        default: "$myhostname ESMTP $mail_name"
+        description: The text that follows the 220 code in the SMTP server's greeting banner.
+
+      postfix_mydestination:
+        type: list
+        elements: str
+        required: true
+        description: The list of domains that this machine considers itself the final destination for.
+
+      postfix_mynetworks:
+        type: list
+        elements: str
+        required: true
+        description: The list of trusted SMTP clients that have more privileges than strangers.
+
+      postfix_relay_domains:
+        type: list
+        elements: str
+        required: false
+        description: Restricts what destinations this system will relay mail to.
+
+      postfix_relayhost:
+        type: str
+        required: false
+        description: The default host to send mail to when no entry is matched in the optional transport table.
+
+      postfix_smtpd_recipient_restrictions:
+        type: list
+        elements: str
+        required: true
+        description: The restrictions for receiving mails.
+
+      postfix_smtpd_sender_restrictions:
+        type: list
+        elements: str
+        required: true
+        description: The restrictions for sender validation.
+
+      postfix_smtp_tls_security_level:
+        type: str
+        required: false
+        default: none
+        choices:
+          - dane
+          - encrypt
+          - fingerprint
+          - may
+          - none
+          - secure
+          - verify
+        description: The default SMTP TLS security level for the Postfix SMTP client.
+
+      postfix_spamassassin:
+        type: str
+        required: false
+        description: Enable spamassassin integration.
+
+      postfix_spamassassin_user:
+        type: str
+        required: false
+        description: The user for spamassassin.
+
+      postfix_clamav:
+        type: str
+        required: false
+        description: Enable clamav integration.
+
+      postfix_aliases:
+        type: list
+        elements: dict
+        required: false
+        description: Configure aliases. Each item should have 'name' and 'destination' keys.
+
+      postfix_sender_access:
+        type: list
+        elements: dict
+        required: false
+        description: Configure sender access controls. Each item should have 'domain' and 'action' keys.
+
+      postfix_recipient_access:
+        type: list
+        elements: dict
+        required: false
+        description: Configure recipient access controls. Each item should have 'domain' and 'action' keys.
+
+      postfix_tls_protocols:
+        type: str
+        required: false
+        description: SSL/TLS protocols to disable.
+
+      postfix_transport_maps_template:
+        type: str
+        required: false
+        description: Path to a transport_maps Jinja2 template.
+
+      postfix_header_checks_template:
+        type: str
+        required: false
+        description: Path to a header_checks Jinja2 template.
+
+      postfix_biff:
+        type: bool
+        required: false
+        description: Whether or not to use the local biff service.
+
+      postfix_append_dot_mydomain:
+        type: bool
+        required: false
+        description: With locally submitted mail, append the string .$mydomain to addresses that have no .domain information.
+
+      postfix_alias_maps:
+        type: str
+        required: false
+        description: The alias databases that are used for local(8) delivery.
+
+      postfix_virtual_mailbox_base:
+        type: str
+        required: false
+        description: A prefix that the virtual(8) delivery agent prepends to all pathname results from $virtual_mailbox_maps table lookups.
+
+      postfix_virtual_mailbox_maps:
+        type: str
+        required: false
+        description: Optional lookup tables with all valid addresses in the domains that match $virtual_mailbox_domains.
+
+      postfix_virtual_mailbox_domains:
+        type: list
+        elements: str
+        required: false
+        description: Postfix is final destination for the specified list of domains; mail is delivered via the $virtual_transport mail delivery transport.
+
+      postfix_virtual_alias_domains:
+        type: list
+        elements: str
+        required: false
+        description: Postfix is final destination for the specified list of virtual alias domains.
+
+      postfix_virtual_alias_maps:
+        type: str
+        required: false
+        description: Optional lookup tables that alias specific mail addresses or domains to other local or remote address.
+
+      postfix_virtual_uid_maps:
+        type: str
+        required: false
+        description: Lookup tables with the per-recipient user ID that the virtual(8) delivery agent uses while writing to the recipient's mailbox.
+
+      postfix_virtual_gid_maps:
+        type: str
+        required: false
+        description: Lookup tables with the per-recipient group ID for virtual(8) mailbox delivery.
+
+      postfix_smtpd_sasl_auth_enable:
+        type: bool
+        required: false
+        description: Enable SASL authentication in the Postfix SMTP server.
+
+      postfix_smtpd_sasl_local_domain:
+        type: str
+        required: false
+        description: The name of the Postfix SMTP server's local SASL authentication realm.
+
+      postfix_smtpd_sasl_security_options:
+        type: str
+        required: false
+        choices:
+          - noplaintext
+          - noactive
+          - nodictionary
+          - noanonymous
+          - forward_secrecy
+          - mutual_auth
+        description: Postfix SMTP server SASL security options.
+
+      postfix_smtpd_sasl_authenticated_header:
+        type: bool
+        required: false
+        description: Report the SASL authenticated user name in the smtpd(8) Received message header.
+
+      postfix_broken_sasl_auth_clients:
+        type: bool
+        required: false
+        description: Enable interoperability with remote SMTP clients that implement an obsolete version of the AUTH command.
+
+      postfix_smtpd_tls_CAfile:
+        type: str
+        required: false
+        description: A file containing (PEM format) CA certificates of root CAs trusted to sign either remote SMTP client certificates or intermediate CA certificates.
+
+      postfix_smtpd_tls_cert_file:
+        type: str
+        required: false
+        description: File with the Postfix SMTP server RSA certificate in PEM format.
+
+      postfix_smtpd_tls_cert_file_source:
+        type: str
+        required: false
+        description: Local file with the Postfix SMTP server RSA certificate in PEM format which shall be copied to the target host.
+
+      postfix_smtpd_tls_key_file:
+        type: str
+        required: false
+        description: File with the Postfix SMTP server RSA private key in PEM format.
+
+      postfix_smtpd_tls_key_file_source:
+        type: str
+        required: false
+        description: Local file with the Postfix SMTP server RSA private key in PEM format which shall be copied to the target host.
+
+      postfix_smtpd_tls_received_header:
+        type: bool
+        required: false
+        description: Request that the Postfix SMTP server produces Received message headers that include information about the protocol and cipher used.
+
+      postfix_smtpd_tls_security_level:
+        type: str
+        required: false
+        choices:
+          - dane
+          - encrypt
+          - fingerprint
+          - may
+          - none
+          - secure
+          - verify
+        description: The default SMTP TLS security level for the Postfix SMTP client.
+
+      postfix_smtpd_tls_ask_ccert:
+        type: bool
+        required: false
+        description: Ask a remote SMTP client for a client certificate.
+
+      postfix_smtpd_tls_loglevel:
+        type: int
+        required: false
+        choices:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        description: Enable additional Postfix SMTP server logging of TLS activity.
+
+      postfix_smtpd_tls_session_cache_database:
+        type: str
+        required: false
+        description: Name of the file containing the optional Postfix SMTP server TLS session cache.
+
+      postfix_smtp_tls_CAfile:
+        type: str
+        required: false
+        description: A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
+
+      postfix_smtp_tls_cert_file:
+        type: str
+        required: false
+        description: File with the Postfix SMTP client RSA certificate in PEM format.
+
+      postfix_smtp_tls_key_file:
+        type: str
+        required: false
+        description: File with the Postfix SMTP client RSA private key in PEM format.
+
+      postfix_smtp_tls_session_cache_database:
+        type: str
+        required: false
+        description: Name of the file containing the optional Postfix SMTP client TLS session cache.
+
+      postfix_tls_random_source:
+        type: str
+        required: false
+        description: The external entropy source for the in-memory tlsmgr(8) pseudo random number generator (PRNG) pool.
+
+      postfix_smtpd_tls_mandatory_protocols:
+        type: str
+        required: false
+        choices:
+          - SSLv2
+          - SSLv3
+          - TLSv1
+          - TLSv1.1
+          - TLSv1.2
+          - TLSv1.3
+        description: TLS protocols accepted by the Postfix SMTP server with mandatory TLS encryption.
+
+      postfix_smtp_tls_mandatory_protocols:
+        type: str
+        required: false
+        choices:
+          - SSLv2
+          - SSLv3
+          - TLSv1
+          - TLSv1.1
+          - TLSv1.2
+          - TLSv1.3
+        description: TLS protocols that the Postfix SMTP client will use with mandatory TLS encryption.
+
+      postfix_virtual_transport:
+        type: str
+        required: false
+        description: The default mail delivery transport and next-hop destination for final delivery to domains listed with $virtual_mailbox_domains.
+
+      postfix_home_mailbox:
+        type: str
+        required: false
+        description: Optional pathname of a mailbox file relative to a local(8) user's home directory.
+
+      postfix_message_size_limit:
+        type: int
+        required: false
+        description: The maximal size in bytes of a message, including envelope information.
+
+      postfix_smtpd_helo_required:
+        type: bool
+        required: false
+        description: Require that a remote SMTP client introduces itself with the HELO or EHLO command before sending the MAIL command.
+
+      postfix_anvil_rate_time_unit:
+        type: str
+        required: false
+        description: The time unit over which client connection rates and other rates are calculated.
+
+      postfix_smtpd_client_connection_rate_limit:
+        type: int
+        required: false
+        description: The maximal number of connection attempts any client is allowed to make to this service per time unit.
+
+      postfix_smtpd_client_connection_count_limit:
+        type: int
+        required: false
+        description: How many simultaneous connections any client is allowed to make to this service.
+
+      postfix_bounce_queue_lifetime:
+        type: str
+        required: false
+        description: Consider a bounce message as undeliverable, when delivery fails with a temporary error, and the time in the queue has reached the bounce_queue_lifetime limit.
+
+      postfix_readme_directory:
+        type: str
+        required: false
+        description: The location of Postfix README files that describe how to build, configure or operate a specific Postfix subsystem or feature.
+
+      postfix_html_directory:
+        type: str
+        required: false
+        description: The location of Postfix HTML files that describe how to build, configure or operate a specific Postfix subsystem or feature.
+
+      postfix_master_custom:
+        type: list
+        elements: dict
+        required: false
+        description: List of custom master.cf entries if more services are needed outside of postfix defaults.
+
+      postfix_smtp_listen_port:
+        type: raw
+        required: false
+        default: smtp
+        description: The port where Postfix listens on. Postfix used /etc/services to map service names to port numbers like 2525. So either specify a port number or a service name like smtp.
+
+      postfix_smtp_sasl_auth_enable:
+        type: bool
+        required: false
+        default: false
+        description: Enable SASL authentication in the Postfix SMTP client.
+
+      postfix_smtp_sasl_password_map:
+        type: str
+        required: false
+        default: ""
+        description: Path to the SASL password map file.
+
+      postfix_smtp_sasl_security_options:
+        type: str
+        required: false
+        default: ""
+        choices:
+          - noplaintext
+          - noactive
+          - nodictionary
+          - noanonymous
+          - mutual_auth
+        description: Postfix SMTP client SASL security options.
+
+      postfix_smtp_tls_wrappermode:
+        type: bool
+        required: false
+        default: false
+        description: Enable TLS wrapper mode for SMTP client.
+
+      postfix_smtp_sasl_password_map_content:
+        type: str
+        required: false
+        default: ""
+        description: Content for the SASL password map file.
