@@ -45,7 +45,7 @@
   ansible.builtin.assert:
     that:
       - postfix_mydestination is defined
-      - postfix_mydestination is iterable or postfix_mydestination is string
+      - postfix_mydestination is iterable
       - postfix_mydestination is not none
     quiet: true
 
@@ -53,9 +53,18 @@
   ansible.builtin.assert:
     that:
       - postfix_mynetworks is defined
-      - postfix_mynetworks is iterable or postfix_mynetworks is string
+      - postfix_mynetworks is iterable
       - postfix_mynetworks is not none
     quiet: true
+
+- name: assert | Test postfix_relay_domains
+  ansible.builtin.assert:
+    that:
+      - postfix_relay_domains is iterable
+      - postfix_relay_domains is not none
+    quiet: true
+  when:
+    - postfix_relay_domains is defined
 
 - name: assert | Test postfix_smtpd_recipient_restrictions
   ansible.builtin.assert:
@@ -134,7 +143,7 @@
 - name: assert | Test postfix_virtual_mailbox_domains
   ansible.builtin.assert:
     that:
-      - postfix_virtual_mailbox_domains is string
+      - postfix_virtual_mailbox_domains is iterable
       - postfix_virtual_mailbox_domains is not none
     quiet: true
   when:
@@ -143,7 +152,7 @@
 - name: assert | Test postfix_virtual_alias_domains
   ansible.builtin.assert:
     that:
-      - postfix_virtual_alias_domains is string
+      - postfix_virtual_alias_domains is iterable
       - postfix_virtual_alias_domains is not none
     quiet: true
   when:

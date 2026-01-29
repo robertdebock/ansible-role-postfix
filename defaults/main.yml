@@ -17,7 +17,11 @@ postfix_inet_protocols: all
 postfix_banner: "$myhostname ESMTP $mail_name"
 
 # The destination tells Postfix what mails to accept mail for.
-postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
+postfix_mydestination:
+  - "$mydomain"
+  - "$myhostname"
+  - "localhost.$mydomain"
+  - "localhost"
 
 # To accept email from other machines, set the mynetworks to something like
 # "- 192.168.0.0/24".
