@@ -322,13 +322,15 @@ mynetworks = {{ _postfix_mynetworks | trim }}
 # permit_mx_backup restriction description in postconf(5).
 #
 #relay_domains = $mydestination
-{% if _postfix_relay_domains != "<None>" %}
 relay_domains = {{ _postfix_relay_domains | trim }}
+
+{% if _postfix_smtpd_recipient_restrictions | trim | length > 0 %}
+smtpd_recipient_restrictions = {{ _postfix_smtpd_recipient_restrictions | trim }}
 {% endif %}
 
-smtpd_recipient_restrictions = {{ _postfix_smtpd_recipient_restrictions | trim }}
-
+{% if _postfix_smtpd_sender_restrictions | trim | length > 0 %}
 smtpd_sender_restrictions = {{ _postfix_smtpd_sender_restrictions | trim }}
+{% endif %}
 
 
 # INTERNET OR INTRANET
