@@ -6,6 +6,11 @@
     cmd: postalias "{{ postfix_alias_path }}"
   changed_when: true
 
+- name: Rebuild smtp_generic database
+  ansible.builtin.command:
+    cmd: postmap "{{ postfix_smtp_generic_path }}"
+  changed_when: yes
+
 - name: Rebuild sender_access database
   ansible.builtin.command:
     cmd: postmap "{{ postfix_sender_access_path }}"
