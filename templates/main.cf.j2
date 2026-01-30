@@ -770,16 +770,16 @@ smtp_use_tls = {{ postfix_smtp_use_tls }}
 smtp_tls_note_starttls_offer = {{ postfix_smtp_tls_note_starttls_offer }}
 {% endif %}
 
-{% if postfix_smtp_tls_CAfile is defined and postfix_smtp_tls_CAfile != "" %}
-smtp_tls_CAfile = {{ postfix_smtp_tls_CAfile }}
+{% if postfix_smtp_tls_cafile is defined and postfix_smtp_tls_cafile != "" %}
+smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
 {% endif %}
 
-{% if postfix_smtp_tls_CApath is defined and postfix_smtp_tls_CApath != "" %}
-smtp_tls_CApath = {{ postfix_smtp_tls_CApath }}
+{% if postfix_smtp_tls_capath is defined and postfix_smtp_tls_capath != "" %}
+smtp_tls_CApath = {{ postfix_smtp_tls_capath }}
 {% endif %}
 
-{% if postfix_tls_append_default_CA is defined and postfix_tls_append_default_CA != "" %}
-tls_append_default_CA = {{ postfix_tls_append_default_CA }}
+{% if postfix_tls_append_default_ca is defined and postfix_tls_append_default_ca != "" %}
+tls_append_default_CA = {{ postfix_tls_append_default_ca }}
 {% endif %}
 
 # Optional lookup tables with mappings from recipient address to (message delivery transport, next-hop destination).

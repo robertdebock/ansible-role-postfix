@@ -553,30 +553,30 @@
   when:
     - postfix_smtp_tls_note_starttls_offer is defined
 
-- name: assert | Test postfix_smtp_tls_CAfile
+- name: assert | Test postfix_smtp_tls_cafile
   ansible.builtin.assert:
     that:
-      - postfix_smtp_tls_CAfile is string
+      - postfix_smtp_tls_cafile is string
     quiet: true
   when:
-    - postfix_smtp_tls_CAfile is defined
+    - postfix_smtp_tls_cafile is defined
 
-- name: assert | Test postfix_smtp_tls_CApath
+- name: assert | Test postfix_smtp_tls_capath
   ansible.builtin.assert:
     that:
-      - postfix_smtp_tls_CApath is string
+      - postfix_smtp_tls_capath is string
     quiet: true
   when:
-    - postfix_smtp_tls_CApath is defined
+    - postfix_smtp_tls_capath is defined
 
-- name: assert | Test postfix_tls_append_default_CA
+- name: assert | Test postfix_tls_append_default_ca
   ansible.builtin.assert:
     that:
-      - postfix_tls_append_default_CA is string
-      - postfix_tls_append_default_CA in [ "yes", "no" ]
+      - postfix_tls_append_default_ca is string
+      - postfix_tls_append_default_ca in [ "yes", "no" ]
     quiet: true
   when:
-    - postfix_tls_append_default_CA is defined
+    - postfix_tls_append_default_ca is defined
 
 - name: assert | Test postfix_smtp_sender_dependent_authentication
   ansible.builtin.assert:

@@ -289,7 +289,7 @@ argument_specs:
         required: false
         description: Name of the file containing the optional Postfix SMTP server TLS session cache.
 
-      postfix_smtp_tls_CAfile:
+      postfix_smtp_tls_cafile:
         type: str
         required: false
         description: A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
@@ -472,13 +472,13 @@ argument_specs:
           - "no"
         description: Log the hostname of a remote SMTP server that offers STARTTLS, when TLS is not already enabled for that server.
 
-      postfix_smtp_tls_CApath:
+      postfix_smtp_tls_capath:
         type: str
         required: false
         default: ""
         description: A directory containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
 
-      postfix_tls_append_default_CA:
+      postfix_tls_append_default_ca:
         type: str
         required: false
         default: "no"

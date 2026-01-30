@@ -237,7 +237,7 @@ postfix_smtp_tls_security_level: none
 # postfix_smtpd_tls_session_cache_database: btree:/var/lib/postfix/smtpd_tls_session_cache
 
 # A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
-# postfix_smtp_tls_CAfile: /etc/letsencrypt/live/smtp.syhosting.ch/chain.pem
+# postfix_smtp_tls_cafile: /etc/letsencrypt/live/smtp.syhosting.ch/chain.pem
 
 # Enable TLS in the Postfix SMTP client, by default opportunistically.
 # Valid values are: yes, no
@@ -248,14 +248,14 @@ postfix_smtp_tls_security_level: none
 # postfix_smtp_tls_note_starttls_offer: no
 
 # A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
-# postfix_smtp_tls_CAfile: ""
+# postfix_smtp_tls_cafile: ""
 
 # A directory containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
-# postfix_smtp_tls_CApath: ""
+# postfix_smtp_tls_capath: ""
 
 # Append the system default CA certificates to the ones specified with smtp_tls_CAfile or smtp_tls_CApath.
 # Valid values are: yes, no
-# postfix_tls_append_default_CA: no
+# postfix_tls_append_default_ca: no
 
 # File with the Postfix SMTP client RSA certificate in PEM format.
 # postfix_smtp_tls_cert_file: /etc/letsencrypt/live/smtp.syhosting.ch/cert.pem
@@ -331,14 +331,14 @@ postfix_smtp_use_tls: "no"
 postfix_smtp_tls_note_starttls_offer: "no"
 
 # A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
-postfix_smtp_tls_CAfile: ""
+postfix_smtp_tls_cafile: ""
 
 # A directory containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
-postfix_smtp_tls_CApath: ""
+postfix_smtp_tls_capath: ""
 
 # Append the system default CA certificates to the ones specified with smtp_tls_CAfile or smtp_tls_CApath.
 # Valid values are: yes, no
-postfix_tls_append_default_CA: "no"
+postfix_tls_append_default_ca: "no"
 
 # Enable sender-dependent SASL authentication in the Postfix SMTP client.
 # Valid values are: yes, no
