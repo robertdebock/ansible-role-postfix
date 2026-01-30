@@ -28,6 +28,16 @@ argument_specs:
         default: all
         description: Enable IPv4, and IPv6 if supported - if IPV4 only set to ipv4.
 
+      postfix_smtp_address_preference:
+        type: str
+        required: false
+        default: any
+        choices:
+          - any
+          - ipv4
+          - ipv6
+        description: The address type (ipv6, ipv4 or any) that the Postfix SMTP client will try first, when a destination has IPv6 and IPv4 addresses with equal MX preference.
+
       postfix_banner:
         type: str
         required: false

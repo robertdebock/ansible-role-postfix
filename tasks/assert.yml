@@ -32,6 +32,15 @@
       - postfix_inet_interfaces is not none
     quiet: true
 
+- name: assert | Test postfix_smtp_address_preference
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_address_preference is string
+      - postfix_smtp_address_preference in [ "any", "ipv4", "ipv6" ]
+    quiet: true
+  when:
+    - postfix_smtp_address_preference is defined
+
 - name: assert | Test postfix_banner
   ansible.builtin.assert:
     that:
