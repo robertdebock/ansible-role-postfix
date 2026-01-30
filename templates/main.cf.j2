@@ -880,6 +880,10 @@ home_mailbox = {{ postfix_home_mailbox }}
 message_size_limit = {{ postfix_message_size_limit }}
 {% endif %}
 
+{% if postfix_mailbox_size_limit is defined %}
+mailbox_size_limit = {{ postfix_mailbox_size_limit }}
+{% endif %}
+
 {% if postfix_smtpd_helo_required is defined %}
 smtpd_helo_required = {% if postfix_smtpd_helo_required %}yes{% else %}no{% endif %}
 {% endif %}
