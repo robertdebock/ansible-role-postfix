@@ -71,6 +71,7 @@
     that:
       - postfix_smtpd_recipient_restrictions is defined
       - postfix_smtpd_recipient_restrictions is iterable
+      - postfix_smtpd_recipient_restrictions is not none
     quiet: true
 
 - name: assert | Test postfix_smtpd_sender_restrictions
@@ -78,6 +79,7 @@
     that:
       - postfix_smtpd_sender_restrictions is defined
       - postfix_smtpd_sender_restrictions is iterable
+      - postfix_smtpd_sender_restrictions is not none
     quiet: true
 
 - name: assert | Test postfix_tls_protocols
