@@ -126,6 +126,12 @@ argument_specs:
         required: false
         description: Configure recipient access controls. Each item should have 'domain' and 'action' keys.
 
+      postfix_smtp_generic:
+        type: list
+        elements: dict
+        required: false
+        description: Configure smtp_generic_maps for address rewriting. Each item should have 'envelope_or_header_address' and 'sender_address' keys.
+
       postfix_tls_protocols:
         type: str
         required: false

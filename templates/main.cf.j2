@@ -453,7 +453,7 @@ alias_maps = {{ _postfix_alias_maps }}
 alias_database = lmdb:{{ postfix_alias_path }}
 #alias_database = lmdb:/etc/aliases, lmdb:/opt/majordomo/aliases
 
-{% if postfix_smtp_generic is defined %}
+{% if postfix_smtp_generic is defined and postfix_smtp_generic | length > 0 %}
 smtp_generic_maps = hash:{{ postfix_smtp_generic_path }}
 {% endif %}
 

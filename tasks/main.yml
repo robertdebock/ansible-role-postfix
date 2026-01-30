@@ -134,6 +134,7 @@
     path: "{{ postfix_smtp_generic_path }}"
     regexp: "^{{ item.envelope_or_header_address }}\\s+"
     line: "{{ item.envelope_or_header_address }} {{ item.sender_address }}"
+    create: true
     mode: "0644"
   when:
     - postfix_smtp_generic is defined
