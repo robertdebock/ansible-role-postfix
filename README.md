@@ -19,25 +19,12 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   roles:
     - role: robertdebock.postfix
-      # postfix_relayhost: "[relay.example.com]"
       postfix_myhostname: "smtp.example.com"
       postfix_mydomain: "example.com"
       postfix_myorigin: "example.com"
-      postfix_mynetworks:
-        - 127.0.0.0/8
-        - 192.168.0.0/16
       postfix_aliases:
         - name: root
           destination: test@example.com
-      # Ziggo settings: ("email-address" and "email-password" are placeholders)
-      postfix_relayhost: "[smtp.ziggo.nl]:587"
-      postfix_smtp_sasl_auth_enable: true
-      postfix_smtp_sasl_password_map: "/etc/postfix/relay_pass"
-      postfix_smtp_sasl_security_options: ""
-      postfix_smtp_tls_wrappermode: false
-      postfix_smtp_tls_security_level: may
-      postfix_smtp_sasl_password_map_content: |
-        [smtp.ziggo.nl]:587 email-address:email-password
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-postfix/blob/master/molecule/default/prepare.yml):
@@ -80,12 +67,17 @@ postfix_inet_protocols: all
 postfix_banner: "$myhostname ESMTP $mail_name"
 
 # The destination tells Postfix what mails to accept mail for.
-postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
+postfix_mydestination:
+  - "$mydomain"
+  - "$myhostname"
+  - "localhost.$mydomain"
+  - "localhost"
 
 # To accept email from other machines, set the mynetworks to something like
 # "- 192.168.0.0/24".
 postfix_mynetworks:
   - 127.0.0.0/8
+  - "[::1]/128"
 
 # These settings change the role of the postfix server to a relay host.
 # postfix_relay_domains: "$mydestination"

@@ -27,6 +27,7 @@ postfix_mydestination:
 # "- 192.168.0.0/24".
 postfix_mynetworks:
   - 127.0.0.0/8
+  - "[::1]/128"
 
 # These settings change the role of the postfix server to a relay host.
 # postfix_relay_domains: "$mydestination"
