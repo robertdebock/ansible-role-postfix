@@ -168,7 +168,7 @@ postfix_smtp_tls_security_level: none
 # postfix_append_dot_mydomain: false
 
 # The alias databases that are used for local(8) delivery
-# postfix_alias_maps: "hash:/etc/aliases"
+# postfix_alias_maps: "lmdb:/etc/aliases"
 
 # A prefix that the virtual(8) delivery agent prepends to all pathname results from $virtual_mailbox_maps table lookups.
 # postfix_virtual_mailbox_base: /var/mail
@@ -354,7 +354,7 @@ postfix_tls_append_default_ca: "no"
 # postfix_smtp_sender_dependent_authentication: no
 
 # Optional lookup table with the per-sender SMTP relay host, user name and password information.
-# postfix_sender_dependent_relayhost_maps: hash:/etc/postfix/sender_relayhost_maps
+# postfix_sender_dependent_relayhost_maps: lmdb:/etc/postfix/sender_relayhost_maps
 # postfix_sender_dependent_relayhost_maps_content: |
 #   user@example.com [relay.example.com]:587
 #   user2@example.com [relay2.example.com]:587
@@ -364,7 +364,7 @@ postfix_tls_append_default_ca: "no"
 postfix_sender_canonical_classes: "envelope_sender, header_sender"
 
 # Optional lookup tables that perform sender address rewriting for mail that originates on the local machine.
-# postfix_sender_canonical_maps: hash:/etc/postfix/sender_canonical_maps
+# postfix_sender_canonical_maps: lmdb:/etc/postfix/sender_canonical_maps
 # postfix_sender_canonical_maps_content: |
 #   user@example.com newuser@example.com
 #   user2@example.com newuser2@example.com
@@ -372,7 +372,7 @@ postfix_sender_canonical_classes: "envelope_sender, header_sender"
 # Optional lookup tables that perform address rewriting for outgoing mail.
 # Transform a locally valid address into a globally valid address when sending mail across the Internet.
 # This is needed when the local machine does not have its own Internet domain name, but uses something like localdomain.local instead.
-# postfix_smtp_generic_maps: hash:/etc/postfix/smtp_generic_maps
+# postfix_smtp_generic_maps: lmdb:/etc/postfix/smtp_generic_maps
 # postfix_smtp_generic_maps_content: |
 #   user@localdomain.local user@example.com
 #   user2@localdomain.local user2@example.com

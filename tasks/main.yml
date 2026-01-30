@@ -21,6 +21,11 @@
     name: postfix
     state: present
 
+- name: Install postfix-lmdb
+  ansible.builtin.package:
+    name: "{{ postfix_lmdb_package }}"
+    state: present
+
 - name: Install postfix-mysql
   ansible.builtin.package:
     name: postfix-mysql

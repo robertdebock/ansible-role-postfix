@@ -32,6 +32,11 @@ _postfix_group:
 
 postfix_group: "{{ _postfix_group[ansible_os_family] | default(_postfix_group['default']) }}"
 
+_postfix_lmdb_package:
+  default: postfix-lmdb
+
+postfix_lmdb_package: "{{ _postfix_lmdb_package[ansible_os_family] | default(_postfix_lmdb_package['default']) }}"
+
 _postfix_compatibility_level:
   default: '2'
   jammy: '3.6'
@@ -45,10 +50,10 @@ postfix_compatibility_level: "{{ _postfix_compatibility_level[ansible_distributi
 # These variables handle string/list conversion and conditional prefix building
 
 # Check recipient access prefix
-_postfix_smtpd_recipient_restrictions_check_recipient_access: "{{ (postfix_recipient_access is defined) | ternary('check_recipient_access hash:' ~ postfix_recipient_access_path ~ ',', '') }}"
+_postfix_smtpd_recipient_restrictions_check_recipient_access: "{{ (postfix_recipient_access is defined) | ternary('check_recipient_access lmdb:' ~ postfix_recipient_access_path ~ ',', '') }}"
 
 # Check sender access prefix
-_postfix_smtpd_sender_restrictions_check_sender_access: "{{ (postfix_sender_access is defined) | ternary('check_sender_access hash:' ~ postfix_sender_access_path ~ ',', '') }}"
+_postfix_smtpd_sender_restrictions_check_sender_access: "{{ (postfix_sender_access is defined) | ternary('check_sender_access lmdb:' ~ postfix_sender_access_path ~ ',', '') }}"
 
 # Convert mynetworks to comma-separated string
 _postfix_mynetworks: "{{ postfix_mynetworks | join(', ') }}"
@@ -94,3 +99,6 @@ _postfix_virtual_alias_domains: "{{ (postfix_virtual_alias_domains is defined) |
 # Directory paths for TLS certificates
 _postfix_smtpd_tls_cert_file_dir: "{{ (postfix_smtpd_tls_cert_file is defined) | ternary(postfix_smtpd_tls_cert_file | dirname, '') }}"
 _postfix_smtpd_tls_key_file_dir: "{{ (postfix_smtpd_tls_key_file is defined) | ternary(postfix_smtpd_tls_key_file | dirname, '') }}"
+
+# Default alias_maps using lmdb when not explicitly defined
+_postfix_alias_maps: "{{ postfix_alias_maps | default('lmdb:' ~ postfix_alias_path) }}"

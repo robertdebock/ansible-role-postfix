@@ -30,6 +30,9 @@
 #
 compatibility_level = {{ postfix_compatibility_level }}
 
+# Default database type for Postfix lookup tables
+default_database_type = lmdb
+
 # SOFT BOUNCE
 #
 # The soft_bounce parameter provides a limited safety net for
@@ -293,7 +296,7 @@ unknown_local_recipient_reject_code = 550
 #
 #mynetworks = 168.100.189.0/28, 127.0.0.0/8
 #mynetworks = $config_directory/mynetworks
-#mynetworks = hash:/etc/postfix/network_table
+#mynetworks = lmdb:/etc/postfix/network_table
 mynetworks = {{ _postfix_mynetworks | trim }}
 
 # The relay_domains parameter restricts what destinations this system will
@@ -380,7 +383,7 @@ relayhost = {{ postfix_relayhost|replace("'", "") }}
 # In the left-hand side, specify an @domain.tld wild-card, or specify
 # a user@domain.tld address.
 #
-#relay_recipient_maps = hash:/etc/postfix/relay_recipients
+#relay_recipient_maps = lmdb:/etc/postfix/relay_recipients
 
 # INPUT RATE CONTROL
 #
@@ -435,11 +438,9 @@ relayhost = {{ postfix_relayhost|replace("'", "") }}
 # "postfix reload" to eliminate the delay.
 #
 #alias_maps = dbm:/etc/aliases
-{% if postfix_alias_maps is defined %}
-alias_maps = {{ postfix_alias_maps }}
-{% endif %}
+alias_maps = {{ _postfix_alias_maps }}
 
-#alias_maps = hash:/etc/aliases, nis:mail.aliases
+#alias_maps = lmdb:/etc/aliases, nis:mail.aliases
 #alias_maps = netinfo:/aliases
 
 # The alias_database parameter specifies the alias database(s) that
@@ -449,8 +450,8 @@ alias_maps = {{ postfix_alias_maps }}
 #
 #alias_database = dbm:/etc/aliases
 #alias_database = dbm:/etc/mail/aliases
-alias_database = hash:{{ postfix_alias_path }}
-#alias_database = hash:/etc/aliases, hash:/opt/majordomo/aliases
+alias_database = lmdb:{{ postfix_alias_path }}
+#alias_database = lmdb:/etc/aliases, lmdb:/opt/majordomo/aliases
 
 # ADDRESS EXTENSIONS (e.g., user+foo)
 #
@@ -783,9 +784,9 @@ tls_append_default_CA = {{ postfix_tls_append_default_ca }}
 {% endif %}
 
 # Optional lookup tables with mappings from recipient address to (message delivery transport, next-hop destination).
-# transport_maps = hash:/etc/postfix/transport
+# transport_maps = lmdb:/etc/postfix/transport
 {% if postfix_transport_maps_template is defined %}
-transport_maps = hash:/etc/postfix/transport
+transport_maps = lmdb:/etc/postfix/transport
 {% endif %}
 
 {% if postfix_biff is defined %}
@@ -936,7 +937,7 @@ bounce_queue_lifetime = {{ postfix_bounce_queue_lifetime }}
 # https://stafwag.github.io/blog/blog/2018/03/04/postfix-smarthost-with-authentication/
 smtp_sasl_auth_enable = {{ postfix_smtp_sasl_auth_enable | ternary('yes', 'no') }}
 {% if postfix_smtp_sasl_password_map is defined and postfix_smtp_sasl_password_map != "" %}
-smtp_sasl_password_maps = hash:{{ postfix_smtp_sasl_password_map }}
+smtp_sasl_password_maps = lmdb:{{ postfix_smtp_sasl_password_map }}
 {% endif %}
 {% if postfix_smtp_sasl_security_options is defined and postfix_smtp_sasl_security_options != "" %}
 smtp_sasl_security_options = {{ postfix_smtp_sasl_security_options }}
