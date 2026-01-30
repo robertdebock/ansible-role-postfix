@@ -20,6 +20,10 @@ postfix_recipient_access_path: /etc/postfix/recipient_access
 
 postfix_sender_access_path: /etc/postfix/sender_access
 
+postfix_sender_dependent_relayhost_map_path: /etc/postfix/sender_relayhost_maps
+
+postfix_sender_canonical_map_path: /etc/postfix/sender_canonical_maps
+
 _postfix_group:
   default: postdrop
   Suse: maildrop
@@ -62,6 +66,21 @@ _postfix_smtpd_recipient_restrictions: "{{ ((postfix_smtpd_recipient_restriction
 # Use default([]) to prevent None from being converted to string "None" when join is evaluated
 # Then check if it's a valid non-empty list before processing
 _postfix_smtpd_sender_restrictions: "{{ ((postfix_smtpd_sender_restrictions | default([])) is iterable and not ((postfix_smtpd_sender_restrictions | default([])) is string) and (postfix_smtpd_sender_restrictions | default([])) | length > 0) | ternary(((_postfix_smtpd_sender_restrictions_check_sender_access | trim) ~ ' ' ~ ((postfix_smtpd_sender_restrictions | default([])) | join(', ')) | trim), '') }}"
+
+# Convert smtpd_client_restrictions to comma-separated string
+# Use default([]) to prevent None from being converted to string "None" when join is evaluated
+# Then check if it's a valid non-empty list before processing
+_postfix_smtpd_client_restrictions: "{{ ((postfix_smtpd_client_restrictions | default([])) is iterable and not ((postfix_smtpd_client_restrictions | default([])) is string) and (postfix_smtpd_client_restrictions | default([])) | length > 0) | ternary(((postfix_smtpd_client_restrictions | default([])) | join(', ')) | trim, '') }}"
+
+# Convert smtpd_relay_restrictions to comma-separated string
+# Use default([]) to prevent None from being converted to string "None" when join is evaluated
+# Then check if it's a valid non-empty list before processing
+_postfix_smtpd_relay_restrictions: "{{ ((postfix_smtpd_relay_restrictions | default([])) is iterable and not ((postfix_smtpd_relay_restrictions | default([])) is string) and (postfix_smtpd_relay_restrictions | default([])) | length > 0) | ternary(((postfix_smtpd_relay_restrictions | default([])) | join(', ')) | trim, '') }}"
+
+# Convert debug_peer_list to comma-separated string
+# Use default([]) to prevent None from being converted to string "None" when join is evaluated
+# Then check if it's a valid non-empty list before processing
+_postfix_debug_peer_list: "{{ ((postfix_debug_peer_list | default([])) is iterable and not ((postfix_debug_peer_list | default([])) is string) and (postfix_debug_peer_list | default([])) | length > 0) | ternary(((postfix_debug_peer_list | default([])) | join(', ')) | trim, '') }}"
 
 # Convert virtual_mailbox_domains to comma-separated string, or "<None>" if undefined
 _postfix_virtual_mailbox_domains: "{{ (postfix_virtual_mailbox_domains is defined) | ternary(postfix_virtual_mailbox_domains | join(', '), '<None>') }}"

@@ -441,3 +441,94 @@ argument_specs:
         required: false
         default: ""
         description: Content for the SASL password map file.
+
+      postfix_smtpd_client_restrictions:
+        type: list
+        elements: str
+        required: false
+        description: The restrictions for client access.
+
+      postfix_smtpd_relay_restrictions:
+        type: list
+        elements: str
+        required: false
+        description: The restrictions for relaying.
+
+      postfix_smtp_use_tls:
+        type: str
+        required: false
+        default: "no"
+        choices:
+          - "yes"
+          - "no"
+        description: Enable TLS in the Postfix SMTP client, by default opportunistically.
+
+      postfix_smtp_tls_note_starttls_offer:
+        type: str
+        required: false
+        default: "no"
+        choices:
+          - "yes"
+          - "no"
+        description: Log the hostname of a remote SMTP server that offers STARTTLS, when TLS is not already enabled for that server.
+
+      postfix_smtp_tls_CApath:
+        type: str
+        required: false
+        default: ""
+        description: A directory containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
+
+      postfix_tls_append_default_CA:
+        type: str
+        required: false
+        default: "no"
+        choices:
+          - "yes"
+          - "no"
+        description: Append the system default CA certificates to the ones specified with smtp_tls_CAfile or smtp_tls_CApath.
+
+      postfix_smtp_sender_dependent_authentication:
+        type: str
+        required: false
+        choices:
+          - "yes"
+          - "no"
+        description: Enable sender-dependent SASL authentication in the Postfix SMTP client.
+
+      postfix_sender_dependent_relayhost_maps:
+        type: str
+        required: false
+        description: Optional lookup table with the per-sender SMTP relay host, user name and password information.
+
+      postfix_sender_dependent_relayhost_maps_content:
+        type: str
+        required: false
+        description: Content for the sender_dependent_relayhost_maps file.
+
+      postfix_sender_canonical_classes:
+        type: str
+        required: false
+        default: "envelope_sender, header_sender"
+        description: What addresses are subject to sender_canonical_maps address mapping.
+
+      postfix_sender_canonical_maps:
+        type: str
+        required: false
+        description: Optional lookup tables that perform sender address rewriting for mail that originates on the local machine.
+
+      postfix_sender_canonical_maps_content:
+        type: str
+        required: false
+        description: Content for the sender_canonical_maps file.
+
+      postfix_debug_peer_level:
+        type: int
+        required: false
+        default: 2
+        description: The increment in verbose logging level when an SMTP client or server host name or address matches a pattern in the debug_peer_list parameter.
+
+      postfix_debug_peer_list:
+        type: list
+        elements: str
+        required: false
+        description: An optional list of domain or network patterns, /file/name patterns or type:name tables. When an SMTP client or server host name or address matches a pattern, increase the verbose logging level by the amount specified in the debug_peer_level parameter.

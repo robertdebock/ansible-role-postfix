@@ -516,3 +516,135 @@
     quiet: true
   when:
     - postfix_master_custom is defined
+
+- name: assert | Test postfix_smtpd_client_restrictions
+  ansible.builtin.assert:
+    that:
+      - postfix_smtpd_client_restrictions is iterable
+      - postfix_smtpd_client_restrictions is not none
+    quiet: true
+  when:
+    - postfix_smtpd_client_restrictions is defined
+
+- name: assert | Test postfix_smtpd_relay_restrictions
+  ansible.builtin.assert:
+    that:
+      - postfix_smtpd_relay_restrictions is iterable
+      - postfix_smtpd_relay_restrictions is not none
+    quiet: true
+  when:
+    - postfix_smtpd_relay_restrictions is defined
+
+- name: assert | Test postfix_smtp_use_tls
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_use_tls is string
+      - postfix_smtp_use_tls in [ "yes", "no" ]
+    quiet: true
+  when:
+    - postfix_smtp_use_tls is defined
+
+- name: assert | Test postfix_smtp_tls_note_starttls_offer
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_tls_note_starttls_offer is string
+      - postfix_smtp_tls_note_starttls_offer in [ "yes", "no" ]
+    quiet: true
+  when:
+    - postfix_smtp_tls_note_starttls_offer is defined
+
+- name: assert | Test postfix_smtp_tls_CAfile
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_tls_CAfile is string
+    quiet: true
+  when:
+    - postfix_smtp_tls_CAfile is defined
+
+- name: assert | Test postfix_smtp_tls_CApath
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_tls_CApath is string
+    quiet: true
+  when:
+    - postfix_smtp_tls_CApath is defined
+
+- name: assert | Test postfix_tls_append_default_CA
+  ansible.builtin.assert:
+    that:
+      - postfix_tls_append_default_CA is string
+      - postfix_tls_append_default_CA in [ "yes", "no" ]
+    quiet: true
+  when:
+    - postfix_tls_append_default_CA is defined
+
+- name: assert | Test postfix_smtp_sender_dependent_authentication
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_sender_dependent_authentication is string
+      - postfix_smtp_sender_dependent_authentication in [ "yes", "no" ]
+    quiet: true
+  when:
+    - postfix_smtp_sender_dependent_authentication is defined
+
+- name: assert | Test postfix_sender_dependent_relayhost_maps
+  ansible.builtin.assert:
+    that:
+      - postfix_sender_dependent_relayhost_maps is string
+      - postfix_sender_dependent_relayhost_maps is not none
+    quiet: true
+  when:
+    - postfix_sender_dependent_relayhost_maps is defined
+
+- name: assert | Test postfix_sender_canonical_classes
+  ansible.builtin.assert:
+    that:
+      - postfix_sender_canonical_classes is string
+      - postfix_sender_canonical_classes is not none
+    quiet: true
+  when:
+    - postfix_sender_canonical_classes is defined
+
+- name: assert | Test postfix_sender_canonical_maps
+  ansible.builtin.assert:
+    that:
+      - postfix_sender_canonical_maps is string
+      - postfix_sender_canonical_maps is not none
+    quiet: true
+  when:
+    - postfix_sender_canonical_maps is defined
+
+- name: assert | Test postfix_sender_dependent_relayhost_maps_content
+  ansible.builtin.assert:
+    that:
+      - postfix_sender_dependent_relayhost_maps_content is string
+      - postfix_sender_dependent_relayhost_maps_content is not none
+    quiet: true
+  when:
+    - postfix_sender_dependent_relayhost_maps_content is defined
+
+- name: assert | Test postfix_sender_canonical_maps_content
+  ansible.builtin.assert:
+    that:
+      - postfix_sender_canonical_maps_content is string
+      - postfix_sender_canonical_maps_content is not none
+    quiet: true
+  when:
+    - postfix_sender_canonical_maps_content is defined
+
+- name: assert | Test postfix_debug_peer_level
+  ansible.builtin.assert:
+    that:
+      - postfix_debug_peer_level is number
+    quiet: true
+  when:
+    - postfix_debug_peer_level is defined
+
+- name: assert | Test postfix_debug_peer_list
+  ansible.builtin.assert:
+    that:
+      - postfix_debug_peer_list is iterable
+      - postfix_debug_peer_list is not none
+    quiet: true
+  when:
+    - postfix_debug_peer_list is defined

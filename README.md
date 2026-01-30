@@ -108,6 +108,18 @@ postfix_smtpd_recipient_restrictions:
 postfix_smtpd_sender_restrictions:
   - reject_unknown_sender_domain
 
+# Set the restrictions for client access.
+# postfix_smtpd_client_restrictions:
+#   - permit_mynetworks
+#   - reject_unknown_client
+#   - permit
+
+# Set the restrictions for relaying.
+# postfix_smtpd_relay_restrictions:
+#   - permit_mynetworks
+#   - permit_sasl_authenticated
+#   - defer_unauth_destination
+
 # The default SMTP TLS security level for the Postfix SMTP client
 # Valid values are: dane, encrypt, fingerprint, may, none, secure, verify
 postfix_smtp_tls_security_level: none
@@ -227,6 +239,24 @@ postfix_smtp_tls_security_level: none
 # A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
 # postfix_smtp_tls_CAfile: /etc/letsencrypt/live/smtp.syhosting.ch/chain.pem
 
+# Enable TLS in the Postfix SMTP client, by default opportunistically.
+# Valid values are: yes, no
+# postfix_smtp_use_tls: no
+
+# Log the hostname of a remote SMTP server that offers STARTTLS, when TLS is not already enabled for that server.
+# Valid values are: yes, no
+# postfix_smtp_tls_note_starttls_offer: no
+
+# A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
+# postfix_smtp_tls_CAfile: ""
+
+# A directory containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
+# postfix_smtp_tls_CApath: ""
+
+# Append the system default CA certificates to the ones specified with smtp_tls_CAfile or smtp_tls_CApath.
+# Valid values are: yes, no
+# postfix_tls_append_default_CA: no
+
 # File with the Postfix SMTP client RSA certificate in PEM format.
 # postfix_smtp_tls_cert_file: /etc/letsencrypt/live/smtp.syhosting.ch/cert.pem
 
@@ -291,6 +321,54 @@ postfix_smtp_sasl_password_map: ""
 postfix_smtp_sasl_security_options: ""
 postfix_smtp_tls_wrappermode: false
 postfix_smtp_sasl_password_map_content: ""
+
+# Enable TLS in the Postfix SMTP client, by default opportunistically.
+# Valid values are: yes, no
+postfix_smtp_use_tls: "no"
+
+# Log the hostname of a remote SMTP server that offers STARTTLS, when TLS is not already enabled for that server.
+# Valid values are: yes, no
+postfix_smtp_tls_note_starttls_offer: "no"
+
+# A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
+postfix_smtp_tls_CAfile: ""
+
+# A directory containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates.
+postfix_smtp_tls_CApath: ""
+
+# Append the system default CA certificates to the ones specified with smtp_tls_CAfile or smtp_tls_CApath.
+# Valid values are: yes, no
+postfix_tls_append_default_CA: "no"
+
+# Enable sender-dependent SASL authentication in the Postfix SMTP client.
+# Valid values are: yes, no
+# postfix_smtp_sender_dependent_authentication: no
+
+# Optional lookup table with the per-sender SMTP relay host, user name and password information.
+# postfix_sender_dependent_relayhost_maps: hash:/etc/postfix/sender_relayhost_maps
+# postfix_sender_dependent_relayhost_maps_content: |
+#   user@example.com [relay.example.com]:587
+#   user2@example.com [relay2.example.com]:587
+
+# What addresses are subject to sender_canonical_maps address mapping.
+# Valid values are: envelope_sender, header_sender, envelope_sender, header_sender
+postfix_sender_canonical_classes: "envelope_sender, header_sender"
+
+# Optional lookup tables that perform sender address rewriting for mail that originates on the local machine.
+# postfix_sender_canonical_maps: hash:/etc/postfix/sender_canonical_maps
+# postfix_sender_canonical_maps_content: |
+#   user@example.com newuser@example.com
+#   user2@example.com newuser2@example.com
+
+# Debugging options
+# The increment in verbose logging level when an SMTP client or server host name or address matches a pattern in the debug_peer_list parameter.
+postfix_debug_peer_level: 2
+
+# An optional list of domain or network patterns, /file/name patterns or type:name tables.
+# When an SMTP client or server host name or address matches a pattern, increase the verbose logging level by the amount specified in the debug_peer_level parameter.
+# postfix_debug_peer_list:
+#   - 127.0.0.1
+#   - some.domain
 ```
 
 ## [Requirements](#requirements)
