@@ -805,11 +805,11 @@ virtual_mailbox_maps = {{ postfix_virtual_mailbox_maps }}
 {% endif %}
 
 {% if _postfix_virtual_mailbox_domains | trim != "<None>" %}
-virtual_alias_domains = {{ _postfix_virtual_mailbox_domains | trim }}
+virtual_mailbox_domains = {{ _postfix_virtual_mailbox_domains | trim }}
 {% endif %}
 
 {% if _postfix_virtual_alias_domains | trim != "<None>" %}
-virtual_mailbox_domains = {{ _postfix_virtual_alias_domains | trim }}
+virtual_alias_domains = {{ _postfix_virtual_alias_domains | trim }}
 {% endif %}
 
 {% if postfix_virtual_alias_maps is defined %}
