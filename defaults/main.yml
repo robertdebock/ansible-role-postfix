@@ -113,6 +113,9 @@ postfix_smtp_tls_security_level: none
 # You can supply a transport_maps Jinja2 template here
 # postfix_transport_maps_template: /path/to/transport.j2
 
+# You can supply a custom transport_maps value here (takes precedence over postfix_transport_maps_template)
+# postfix_transport_maps_custom: "lmdb:/etc/postfix/transport, lmdb:/etc/postfix/transport_sec"
+
 # You can supply a header_checks Jinja2 template here
 # postfix_header_checks_template: /path/to/header_checks.j2
 
