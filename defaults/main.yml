@@ -261,6 +261,15 @@ postfix_smtp_tls_security_level: none
 # List of custom master.cf entries if more services are needed outside of postfix defaults
 # postfix_master_custom: []
 
+# Yaml list (or string of comma-separated list) of Postfix before-queue SMTP-only milters
+# postfix_smtpd_milters: []
+
+# Yaml list (or string of comma-separated list) of Postfix before-queue non-SMTP milters
+# postfix_non_smtpd_milters: []
+
+# What to do in case of errors from milters? Specify accept, reject, tempfail, or quarantine (Postfix 2.6 or later).
+# postfix_milter_default_action: accept
+
 # You can change the port where Postfix listens on.
 # Postfix used `/etc/services` to map service names to port numbers like `2525`.
 # So either specify a port number or a service name like `smtp`.
