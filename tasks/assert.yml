@@ -390,6 +390,14 @@
   when:
     - postfix_message_size_limit is defined
 
+- name: assert | Test postfix_mailbox_size_limit
+  ansible.builtin.assert:
+    that:
+      - postfix_mailbox_size_limit is number
+    quiet: true
+  when:
+    - postfix_mailbox_size_limit is defined
+
 - name: assert | Test postfix_smtpd_helo_required
   ansible.builtin.assert:
     that:

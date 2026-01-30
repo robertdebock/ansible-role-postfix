@@ -254,6 +254,9 @@ postfix_smtp_tls_security_level: none
 # The maximal size in bytes of a message, including envelope information.
 # postfix_message_size_limit: 10240000
 
+# The maximal size of any local(8) individual mailbox or maildir file, or zero (no limit). This limit must not be smaller than the message size limit
+# postfix_mailbox_size_limit: 0
+
 # Require that a remote SMTP client introduces itself with the HELO or EHLO command before sending the MAIL command or other commands that require EHLO negotiation.
 # postfix_smtpd_helo_required: false
 
