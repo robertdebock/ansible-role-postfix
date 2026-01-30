@@ -36,6 +36,11 @@
     cmd: postmap "{{ postfix_sender_canonical_map_path }}"
   changed_when: true
 
+- name: Rebuild smtp_generic_maps database
+  ansible.builtin.command:
+    cmd: postmap "{{ postfix_smtp_generic_map_path }}"
+  changed_when: true
+
 - name: Validate configuration
   ansible.builtin.command:
     cmd: postconf

@@ -24,6 +24,8 @@ postfix_sender_dependent_relayhost_map_path: /etc/postfix/sender_relayhost_maps
 
 postfix_sender_canonical_map_path: /etc/postfix/sender_canonical_maps
 
+postfix_smtp_generic_map_path: /etc/postfix/smtp_generic_maps
+
 _postfix_group:
   default: postdrop
   Suse: maildrop

@@ -521,6 +521,16 @@ argument_specs:
         required: false
         description: Content for the sender_canonical_maps file.
 
+      postfix_smtp_generic_maps:
+        type: str
+        required: false
+        description: Optional lookup tables that perform address rewriting for outgoing mail. Transform a locally valid address into a globally valid address when sending mail across the Internet.
+
+      postfix_smtp_generic_maps_content:
+        type: str
+        required: false
+        description: Content for the smtp_generic_maps file.
+
       postfix_debug_peer_level:
         type: int
         required: false

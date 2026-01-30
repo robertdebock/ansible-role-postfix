@@ -191,6 +191,18 @@
     - Rebuild sender_canonical_maps database
     - Reload postfix
 
+- name: Place smtp_generic_maps
+  ansible.builtin.copy:
+    content: "{{ postfix_smtp_generic_maps_content }}"
+    dest: "{{ postfix_smtp_generic_map_path }}"
+    mode: "0644"
+  when:
+    - postfix_smtp_generic_maps_content is defined
+    - postfix_smtp_generic_maps_content != ""
+  notify:
+    - Rebuild smtp_generic_maps database
+    - Reload postfix
+
 - name: Flush handlers again
   ansible.builtin.meta: flush_handlers
 

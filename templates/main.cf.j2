@@ -962,3 +962,9 @@ sender_canonical_maps = hash:{{ postfix_sender_canonical_map_path }}
 {% elif postfix_sender_canonical_maps is defined and postfix_sender_canonical_maps != "" %}
 sender_canonical_maps = hash:{{ postfix_sender_canonical_maps }}
 {% endif %}
+
+{% if postfix_smtp_generic_maps_content is defined and postfix_smtp_generic_maps_content != "" %}
+smtp_generic_maps = hash:{{ postfix_smtp_generic_map_path }}
+{% elif postfix_smtp_generic_maps is defined and postfix_smtp_generic_maps != "" %}
+smtp_generic_maps = hash:{{ postfix_smtp_generic_maps }}
+{% endif %}

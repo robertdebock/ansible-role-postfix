@@ -360,6 +360,14 @@ postfix_sender_canonical_classes: "envelope_sender, header_sender"
 #   user@example.com newuser@example.com
 #   user2@example.com newuser2@example.com
 
+# Optional lookup tables that perform address rewriting for outgoing mail.
+# Transform a locally valid address into a globally valid address when sending mail across the Internet.
+# This is needed when the local machine does not have its own Internet domain name, but uses something like localdomain.local instead.
+# postfix_smtp_generic_maps: hash:/etc/postfix/smtp_generic_maps
+# postfix_smtp_generic_maps_content: |
+#   user@localdomain.local user@example.com
+#   user2@localdomain.local user2@example.com
+
 # Debugging options
 # The increment in verbose logging level when an SMTP client or server host name or address matches a pattern in the debug_peer_list parameter.
 postfix_debug_peer_level: 2

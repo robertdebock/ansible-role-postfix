@@ -632,6 +632,24 @@
   when:
     - postfix_sender_canonical_maps_content is defined
 
+- name: assert | Test postfix_smtp_generic_maps
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_generic_maps is string
+      - postfix_smtp_generic_maps is not none
+    quiet: true
+  when:
+    - postfix_smtp_generic_maps is defined
+
+- name: assert | Test postfix_smtp_generic_maps_content
+  ansible.builtin.assert:
+    that:
+      - postfix_smtp_generic_maps_content is string
+      - postfix_smtp_generic_maps_content is not none
+    quiet: true
+  when:
+    - postfix_smtp_generic_maps_content is defined
+
 - name: assert | Test postfix_debug_peer_level
   ansible.builtin.assert:
     that:
