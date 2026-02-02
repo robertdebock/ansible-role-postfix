@@ -100,6 +100,15 @@
   when:
     - postfix_tls_protocols is defined
 
+- name: assert | Test postfix_transport_maps_custom
+  ansible.builtin.assert:
+    that:
+      - postfix_transport_maps_custom is string
+      - postfix_transport_maps_custom is not none
+    quiet: true
+  when:
+    - postfix_transport_maps_custom is defined
+
 - name: assert | Test postfix_smtp_tls_security_level
   ansible.builtin.assert:
     that:
