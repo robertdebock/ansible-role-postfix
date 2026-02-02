@@ -142,6 +142,11 @@ argument_specs:
         required: false
         description: Path to a transport_maps Jinja2 template.
 
+      postfix_transport_maps_custom:
+        type: str
+        required: false
+        description: Custom transport_maps value (takes precedence over postfix_transport_maps_template).
+
       postfix_header_checks_template:
         type: str
         required: false
@@ -404,6 +409,26 @@ argument_specs:
         elements: dict
         required: false
         description: List of custom master.cf entries if more services are needed outside of postfix defaults.
+
+      postfix_smtpd_milters:
+        type: raw
+        required: false
+        description: Yaml list (or string of comma-separated list) of Postfix before-queue SMTP-only milters.
+
+      postfix_non_smtpd_milters:
+        type: raw
+        required: false
+        description: Yaml list (or string of comma-separated list) of Postfix before-queue non-SMTP milters.
+
+      postfix_milter_default_action:
+        type: str
+        required: false
+        choices:
+          - accept
+          - reject
+          - tempfail
+          - quarantine
+        description: What to do in case of errors from milters. Specify accept, reject, tempfail, or quarantine (Postfix 2.6 or later).
 
       postfix_smtp_listen_port:
         type: raw
