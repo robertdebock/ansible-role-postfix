@@ -119,6 +119,7 @@
     path: "{{ postfix_alias_path }}"
     regexp: "^{{ item.name }}:"
     line: "{{ item.name }}: {{ item.destination }}"
+    create: true
     mode: "0644"
   when:
     - postfix_aliases is defined
